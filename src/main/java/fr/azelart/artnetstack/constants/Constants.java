@@ -17,63 +17,96 @@ package fr.azelart.artnetstack.constants;
 
 /**
  * Constants file.
+ *
  * @author Corentin Azelart
  *
  */
 public final class Constants {
 
-	/**
-	 * Private constructor.
-	 */
-	private Constants() {
-		super();
-	}
+    /**
+     * Private constructor.
+     */
+    private Constants() {
+        super();
+    }
 
-	/** Server port. */
-	public static final short SERVER_PORT = 0x1936;
+    /**
+     * Server port.
+     */
+    public static final short SERVER_PORT = 0x1936;
 
-	/** IP Adress. */
-	public static final String SERVER_IP = "192.168.1.17";
+    /**
+     * IP Adress.
+     */
+    public static final String SERVER_IP = "192.168.0.13";
 
-	/** Version 14. */
-	public static final int ART_NET_VERSION = 14;
+    /**
+     * Version 14.
+     */
+    public static final int ART_NET_VERSION = 14;
 
-	/** General Id. */
-	public static final String ID = "Art-Net";
+    /**
+     * General Id.
+     */
+    public static final String ID = "Art-Net";
 
-	/** Major version. */
-	public static final int VERSION_LIB_HIGHT = 1;
+    /**
+     * Major version.
+     */
+    public static final int VERSION_LIB_HIGHT = 1;
 
-	/** Minor version. */
-	public static final int VERSION_LIB_LOW = 0;
+    /**
+     * Minor version.
+     */
+    public static final int VERSION_LIB_LOW = 0;
 
-	/** Short Name. */
-	public static final String SHORT_NAME = "ArtNetStack 0.001";
+    /**
+     * Short Name.
+     */
+    public static final String SHORT_NAME = "ArtNetStack 0.001";
 
-	/** Long Name. */
-	public static final String LONG_NAME = "ArtNetStack 1.001 - More Informations : corentin@azelart.fr";
+    /**
+     * Long Name.
+     */
+    public static final String LONG_NAME = "ArtNetStack 1.001 - More Informations : corentin@azelart.fr";
 
-	/** Max Ports (4 in protocol specification). */
-	public static final int MAX_PORT = 4;
+    /**
+     * Max Ports (4 in protocol specification).
+     */
+    public static final int MAX_PORT = 4;
 
-	/** Size of DMX data area. */
-	public static final int DMX_512_SIZE = 512;
+    /**
+     * Size of DMX data area.
+     */
+    public static final int DMX_512_SIZE = 512;
 
-	/** Integer escape. */
-	public static final int INT_ESCAP = 0xff;
+    /**
+     * Integer escape.
+     */
+    public static final int INT_ESCAP = 0xff;
 
-	/** Max length for short name. */
-	public static final int MAX_LENGTH_SHORT_NAME = 18;
+    /**
+     * Max length for short name.
+     */
+    public static final int MAX_LENGTH_SHORT_NAME = 18;
 
-	/** Max length for long name. */
-	public static final int MAX_LENGTH_LONG_NAME = 64;
+    /**
+     * Max length for long name.
+     */
+    public static final int MAX_LENGTH_LONG_NAME = 64;
 
-	/** Max length for node report. */
-	public static final int MAX_LENGTH_NODE_REPORT = 64;
+    /**
+     * Max length for node report.
+     */
+    public static final int MAX_LENGTH_NODE_REPORT = 64;
 
-	/** DMX Data value : 512. */
-	public static final int DMX_DATA_LENGTH = 512;
+    /**
+     * DMX Data value : 512.
+     */
+    public static final int DMX_DATA_LENGTH = 512;
 
-	/** Buffer of datagramm trames. */
-	public static final int SERVER_BUFFER_INPUT = 1024;
+    /**
+     * Buffer of datagramm trames.
+     */
+    public static final int SERVER_BUFFER_INPUT = 1024;
 }
