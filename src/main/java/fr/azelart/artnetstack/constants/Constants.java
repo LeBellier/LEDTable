@@ -41,6 +41,11 @@ public final class Constants {
     public static final String SERVER_IP = "192.168.0.13";
 
     /**
+     * IP Adress.
+     */
+    public static final String networkInterfaceName = "Intel(R) Dual Band Wireless-AC 3160";
+
+    /**
      * Version 14.
      */
     public static final int ART_NET_VERSION = 14;

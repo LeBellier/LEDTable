@@ -1,15 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package fr.bellier.testApplet.utils;
+package fr.bellier.core.utils;
 
 /**
  *
- * @author bruno
+ * @author LeBellier
  */
 public class CoordinateConverter {
+
+    private CoordinateConverter() {
+    }
+
+    public static CoordinateConverter getInstance() {
+        return INSTANCE;
+    }
+
+    private static final CoordinateConverter INSTANCE = new CoordinateConverter();
 
     /**
      * convert From [0..4][0..6] to [0..34]
@@ -20,7 +24,7 @@ public class CoordinateConverter {
      * @param jCurrent
      * @return xCurrent=iCurrent*jSize+jCurrent
      */
-    static public int convertTo1D(int iSize, int jSize, int iCurrent, int jCurrent) {
+    public int convertTo1D(int iSize, int jSize, int iCurrent, int jCurrent) {
         return iCurrent * jSize + jCurrent;
     }
 
@@ -32,7 +36,7 @@ public class CoordinateConverter {
      * @param xCurrent
      * @return iCurrent=xCurrent%jSize
      */
-    static public int convertTo2Di(int iSize, int jSize, int xCurrent) {
+    public int convertTo2Di(int iSize, int jSize, int xCurrent) {
         return xCurrent / jSize;
     }
 
@@ -44,7 +48,7 @@ public class CoordinateConverter {
      * @param xCurrent
      * @return jCurrent=xCurrent/jSize
      */
-    static public int convertTo2Dj(int iSize, int jSize, int xCurrent) {
+    public int convertTo2Dj(int iSize, int jSize, int xCurrent) {
         return xCurrent % jSize;
     }
 }

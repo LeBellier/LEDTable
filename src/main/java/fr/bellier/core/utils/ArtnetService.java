@@ -1,18 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package fr.bellier.testApplet.utils;
+package fr.bellier.core.utils;
 
-import fr.bellier.testApplet.entities.Box;
+import fr.bellier.core.entities.Box;
 import java.util.List;
 
 /**
  *
- * @author bruno
+ * @author LeBellier
  */
-public class ArtNetService {
+public class ArtnetService {
+
+    private ArtnetService() {
+    }
+
+    public static ArtnetService getInstance() {
+        return INSTANCE;
+    }
+
+    private static final ArtnetService INSTANCE = new ArtnetService();
 
     public int[] colorToByteArray(List<Box> boxes) {
         int[] dmx = new int[(3 * boxes.size())];

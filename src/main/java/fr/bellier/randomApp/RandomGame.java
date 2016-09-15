@@ -3,19 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.bellier.testApplet;
+package fr.bellier.randomApp;
 
+import fr.bellier.core.entities.Table;
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  *
- * @author bruno
+ * @author LeBellier
  */
-public class RandomGame extends TableGame {
+public class RandomGame {
 
-    private final List<Integer> availableSquares = new LinkedList<Integer>();
+    private static RandomGame game;
+
+    private final List<Integer> availableBoxes = new LinkedList<Integer>();
+    private final Table table = new Table();
 
     /**
      * @param args the command line arguments
@@ -53,7 +57,7 @@ public class RandomGame extends TableGame {
         });
     }
 
-    public static TableGame getSingleton() {
+    public static RandomGame getSingleton() {
         if (game == null) {
             game = new RandomGame();
         }
@@ -61,11 +65,7 @@ public class RandomGame extends TableGame {
     }
 
     RandomGame() {
-        super();
-        setAllSquare(Color.BLACK);
-        for (int i = 0; i < getSize(); i++) {
-            availableSquares.add(i);
-        }
+        restart();
     }
 
     /**
@@ -79,11 +79,11 @@ public class RandomGame extends TableGame {
         return 1;
     }
 
-    void restart() {
-        setAllSquare(Color.BLACK);
-        availableSquares.clear();
-        for (int i = 0; i < getSize(); i++) {
-            availableSquares.add(i);
+    public void restart() {
+        table.setAllBoxes(Color.BLACK);
+        availableBoxes.clear();
+        for (int i = 0; i < table.getSize(); i++) {
+            availableBoxes.add(i);
         }
     }
 
@@ -91,23 +91,23 @@ public class RandomGame extends TableGame {
 
         @Override
         public void run() {
-            int higher = availableSquares.size();
-            int idWinnerSquare = (int) (Math.random() * higher);
-            int nbIntermediateSquare = (int) (Math.random() * 10);
-            for (int i = 0; i < nbIntermediateSquare + 10; i++) {
-                int idCurrentSquare = (int) (Math.random() * higher);
-                setSquare(availableSquares.get(idCurrentSquare), Color.green, Boolean.TRUE);
-
+            int higher = availableBoxes.size();
+            int idWinnerBox = (int) (Math.random() * higher);
+            int nbIntermediateBox = (int) (Math.random() * 10);
+            for (int i = 0; i < nbIntermediateBox + 10; i++) {
+                int idCurrentBox = (int) (Math.random() * higher);
+                table.setBox(availableBoxes.get(idCurrentBox), Color.green);
+                table.notifyObservers();
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }
-                setSquare(availableSquares.get(idCurrentSquare), Color.black, Boolean.TRUE);
+                table.setBox(availableBoxes.get(idCurrentBox), Color.black);
             }
-            setSquare(availableSquares.get(idWinnerSquare), Color.red, Boolean.TRUE);
-            availableSquares.remove(idWinnerSquare);
+            table.setBox(availableBoxes.get(idWinnerBox), Color.red);
+            table.notifyObservers();
+            availableBoxes.remove(idWinnerBox);
         }
-
     }
 }

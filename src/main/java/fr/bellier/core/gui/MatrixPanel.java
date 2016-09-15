@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package fr.bellier.testApplet;
+package fr.bellier.core.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,12 +8,15 @@ import javax.swing.JLabel;
 
 /**
  *
- * @author bruno
+ * @author LeBellier
  */
 public class MatrixPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form matrixPanel
+     *
+     * @param maxRow
+     * @param maxCol
      */
     public MatrixPanel(int maxRow, int maxCol) {
         initComponents();
@@ -49,12 +47,8 @@ public class MatrixPanel extends javax.swing.JPanel {
         setPreferredSize(dmnsn);
         for (int row = 0; row < maxRow; row++) {
             for (int column = 0; column < maxCol; column++) {
-                JLabel currentWorkingLabel;
-
-                currentWorkingLabel = new javax.swing.JLabel();
-                //currentWorkingLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+                JLabel currentWorkingLabel = new javax.swing.JLabel();
                 currentWorkingLabel.setOpaque(true);
-                //currentWorkingLabel.setText("Lbl" + row + ":" + column);
                 cellLbls.add(currentWorkingLabel);
                 add(currentWorkingLabel);
             }
@@ -62,7 +56,6 @@ public class MatrixPanel extends javax.swing.JPanel {
     }
 
     public void setColor(int index, Color color) {
-        //cellLbls.get(index).setForeground(color);
         cellLbls.get(index).setBackground(color);
     }
 }

@@ -87,24 +87,29 @@ public class ArtNetServer extends Thread implements Runnable {
      * @throws SocketException if socket error
      */
     public ArtNetServer() throws UnknownHostException, SocketException {
-        this(InetAddress.getByName(Constants.SERVER_IP), Constants.SERVER_PORT);
+        this(Constants.networkInterfaceName, InetAddress.getByName(Constants.SERVER_IP), Constants.SERVER_PORT);
     }
 
     /**
      * Constructor of server.
      *
+     * @param networkInterfaceName
      * @param inetAddress is the address informations
      * @param port is the port
      * @throws SocketException if socket error
      * @throws UnknownHostException if we can't find the host.
      */
-    public ArtNetServer(final InetAddress inetAddress, final int port) throws SocketException, UnknownHostException {
+    public ArtNetServer(String networkInterfaceName, final InetAddress inetAddress, final int port) throws SocketException, UnknownHostException {
         listenersListPacket = new ArrayList<ArtNetPacketListener>();
         listenersListServer = new ArrayList<ServerListener>();
         datagramSocket = new DatagramSocket(port);
         this.port = port;
         this.inetAddress = inetAddress;
-        inetAddressBroadcast = getBroadcastPerso();
+        inetAddressBroadcast = getBroadcast(networkInterfaceName);
+    }
+
+    public void setInetAddressBroadcast(InetAddress inetAddressBroadcast) {
+        this.inetAddressBroadcast = inetAddressBroadcast;
     }
 
     /**
@@ -159,13 +164,15 @@ public class ArtNetServer extends Thread implements Runnable {
     }
 
     /**
-     * Get Broadcast Ip.
+     * Get Broadcast Ip from the NetworkInterface where the IP Adress is
+     * declared
      *
      * @param inetAddress is address informations
      * @return broadcast ip.
      * @throws SocketException in error when searching broadcast address
+     * @throws java.net.UnknownHostException
      */
-    private static InetAddress getBroadcast(final InetAddress inetAddress) throws SocketException {
+    public static InetAddress getBroadcast(final InetAddress inetAddress) throws SocketException, UnknownHostException {
         final Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
         NetworkInterface networkInterface = null;
         while (interfaces.hasMoreElements()) {
@@ -177,27 +184,27 @@ public class ArtNetServer extends Thread implements Runnable {
             }
 
         }
-        return null;
+        return InetAddress.getByName("255.255.255.255");
     }
 
     /**
-     * Get Broadcast Ip.
+     * Get Broadcast Ip from a networkInterfaceName
      *
-     * @param inetAddress is address informations
+     * @param networkInterfaceName
      * @return broadcast ip.
      * @throws SocketException in error when searching broadcast address
+     * @throws java.net.UnknownHostException
      */
-    private static InetAddress getBroadcastPerso() throws SocketException {
+    public static InetAddress getBroadcast(String networkInterfaceName) throws SocketException, UnknownHostException {
         final Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
         NetworkInterface networkInterface = null;
         while (interfaces.hasMoreElements()) {
             networkInterface = interfaces.nextElement();
-            if (networkInterface.getDisplayName().equals("Intel(R) Dual Band Wireless-AC 3160")) {
+            if (networkInterface.getDisplayName().equals(networkInterfaceName)) {
                 return networkInterface.getInterfaceAddresses().get(0).getBroadcast();
             }
-
         }
-        return null;
+        return InetAddress.getByName("255.255.255.255");
     }
 
     /**

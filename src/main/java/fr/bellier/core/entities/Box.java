@@ -1,10 +1,10 @@
-package fr.bellier.testApplet.entities;
+package fr.bellier.core.entities;
 
 import java.awt.Color;
 
 /**
  *
- * @author bruno
+ * @author LeBellier
  */
 public class Box {
 
@@ -18,7 +18,7 @@ public class Box {
 
     @Override
     public String toString() {
-        return "Box{" + "i=" + index + ", color=" + color + '}';
+        return "Box{" + "i=" + index + ", color={" + color.getRed() + "," + color.getGreen() + "," + color.getBlue() + "}}";
     }
 
 //<editor-fold defaultstate="collapsed" desc=" Get/Set">
@@ -45,5 +45,6 @@ public class Box {
     public void setColor(Color color) {
         this.color = color;
     }
+
 //</editor-fold>
 }

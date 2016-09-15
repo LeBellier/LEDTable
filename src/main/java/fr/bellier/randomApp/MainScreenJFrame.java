@@ -1,20 +1,21 @@
-package fr.bellier.testApplet;
+package fr.bellier.randomApp;
 
-import fr.bellier.testApplet.entities.Box;
+import fr.bellier.core.entities.Box;
+import fr.bellier.core.gui.MatrixPanel;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 /**
  *
- * @author bruno
+ * @author LeBellier
  */
-public class Application_1 extends javax.swing.JFrame implements Observer {
+public class MainScreenJFrame extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form Application
      */
-    public Application_1(int maxRow, int maxCol, TableGame game) {
+    public MainScreenJFrame(int maxRow, int maxCol, RandomGame game) {
         initComponents();
         initSpecific(maxRow, maxCol, game);
     }
@@ -68,48 +69,13 @@ public class Application_1 extends javax.swing.JFrame implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     private void restartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartBtnActionPerformed
-        ((RandomGame) myGame).restart();
+        myGame.restart();
     }//GEN-LAST:event_restartBtnActionPerformed
 
     private void nextStepBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextStepBtnActionPerformed
-        ((RandomGame) myGame).nextStep();
+        myGame.nextStep();
     }//GEN-LAST:event_nextStepBtnActionPerformed
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                new Application_1().setVisible(true);
-//            }
-//        });
-//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel completeDisplayPanel;
     private javax.swing.JPanel contrllerJPanel;
@@ -120,18 +86,14 @@ public class Application_1 extends javax.swing.JFrame implements Observer {
     // End of variables declaration//GEN-END:variables
 
     private MatrixPanel matrixPanel;
-    private TableGame myGame;
+    private RandomGame myGame;
 
-    public void initSpecific(int maxRow, int maxCol, TableGame game) {
+    public void initSpecific(int maxRow, int maxCol, RandomGame game) {
         myGame = game;
         matrixPanel = new MatrixPanel(maxRow, maxCol);
         completeDisplayPanel.add(matrixPanel);
 
         pack();
-    }
-
-    private void restartGame() {
-        myGame = new RandomGame();
     }
 
     @Override
@@ -141,11 +103,5 @@ public class Application_1 extends javax.swing.JFrame implements Observer {
         for (Box box : boxes) {
             matrixPanel.setColor(box.getIndex(), box.getColor());
         }
-//        SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                repaint();
-//            }
-//        });
     }
 }

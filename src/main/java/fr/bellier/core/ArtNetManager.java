@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package fr.bellier.testApplet;
+package fr.bellier.core;
 
 import fr.azelart.artnetstack.domain.controller.Controller;
 import fr.azelart.artnetstack.domain.controller.ControllerGoodInput;
@@ -14,8 +9,8 @@ import fr.azelart.artnetstack.domain.enums.PortTypeEnum;
 import fr.azelart.artnetstack.listeners.ServerListener;
 import fr.azelart.artnetstack.server.ArtNetServer;
 import fr.azelart.artnetstack.utils.ArtNetPacketEncoder;
-import fr.bellier.testApplet.entities.Box;
-import fr.bellier.testApplet.utils.ArtNetService;
+import fr.bellier.core.entities.Box;
+import fr.bellier.core.utils.ArtnetService;
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -29,14 +24,14 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author bruno
+ * @author LeBellier
  */
 public class ArtNetManager implements Observer {
 
     private Controller thisControler;
     private ArtNetServer artNetServer;
 
-    public void initArtNetServer() {
+    public void ArtNetManager() {
         createControler();
 
         try {
@@ -110,7 +105,7 @@ public class ArtNetManager implements Observer {
         thisControler.setSubNetwork("00");
     }
 
-    public void sendPacket(final String univers, final int dmx[]) {
+    private void sendPacket(final String univers, final int dmx[]) {
         try {
             artNetServer.sendPacket(ArtNetPacketEncoder.encodeArtDmxPacket(univers, "0", dmx));
             System.out.println("SendPacket");
@@ -121,7 +116,7 @@ public class ArtNetManager implements Observer {
 
     @Override
     public void update(Observable o, Object o1) {
-        ArtNetService service = new ArtNetService();
+        ArtnetService service = ArtnetService.getInstance();
         sendPacket("1", service.colorToByteArray((List<Box>) o1));
     }
 }
