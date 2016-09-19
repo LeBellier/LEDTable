@@ -5,10 +5,14 @@
  */
 package fr.bellier.randomApp;
 
+import fr.bellier.core.ArtNetManager;
 import fr.bellier.core.entities.Table;
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  *
@@ -17,9 +21,9 @@ import java.util.List;
 public class RandomGame {
 
     private static RandomGame game;
-
-    private final List<Integer> availableBoxes = new LinkedList<Integer>();
-    private final Table table = new Table();
+    private static BlockingQueue<Runnable> bq;
+    private final List<Integer> availableBoxes;
+    private final Table table;
 
     /**
      * @param args the command line arguments
@@ -53,6 +57,7 @@ public class RandomGame {
             @Override
             public void run() {
                 RandomGame.getSingleton();
+
             }
         });
     }
@@ -63,20 +68,31 @@ public class RandomGame {
         }
         return game;
     }
+    private final ExecutorService exService = Executors.newSingleThreadExecutor();
 
     RandomGame() {
+
+        this.table = new Table();
+        MainScreenJFrame frame = new MainScreenJFrame(table.getNbRows(), table.getNbColumns(), this);
+        ArtNetManager artNetManager = new ArtNetManager();
+        this.availableBoxes = new LinkedList<Integer>();
+        table.addObserver(frame);
+        table.addObserver(artNetManager);
         restart();
+
+        frame.setVisible(true);
     }
 
     /**
      *
      * @return index of the chosen square
      */
-    public int nextStep() {
-
-        NextStepThread nextStepThread = new NextStepThread();
-        nextStepThread.start();
-        return 1;
+    public void nextStep() {
+        if (availableBoxes.size() != 0) {
+            exService.execute(new NextStepThread());
+        } else {
+            restart();
+        }
     }
 
     public void restart() {
@@ -97,7 +113,7 @@ public class RandomGame {
             for (int i = 0; i < nbIntermediateBox + 10; i++) {
                 int idCurrentBox = (int) (Math.random() * higher);
                 table.setBox(availableBoxes.get(idCurrentBox), Color.green);
-                table.notifyObservers();
+                table.notifyObservers(table.getBoxes());
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException ex) {
@@ -106,7 +122,7 @@ public class RandomGame {
                 table.setBox(availableBoxes.get(idCurrentBox), Color.black);
             }
             table.setBox(availableBoxes.get(idWinnerBox), Color.red);
-            table.notifyObservers();
+            table.notifyObservers(table.getBoxes());
             availableBoxes.remove(idWinnerBox);
         }
     }

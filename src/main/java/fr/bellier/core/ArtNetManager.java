@@ -31,7 +31,7 @@ public class ArtNetManager implements Observer {
     private Controller thisControler;
     private ArtNetServer artNetServer;
 
-    public void ArtNetManager() {
+    public ArtNetManager() {
         createControler();
 
         try {

@@ -11,9 +11,8 @@ import java.util.List;
 public class Table extends java.util.Observable {
 
     private final List<Box> boxes = new LinkedList<Box>();
-    protected final int nbRows = 1;
-    protected final int nbColumns = 12;
-    protected static Table game;
+    protected final int nbRows = 12;
+    protected final int nbColumns = 13;
 
     public Table() {
 
@@ -49,4 +48,17 @@ public class Table extends java.util.Observable {
         setChanged();
         notifyObservers(boxes);
     }
+
+    public List<Box> getBoxes() {
+        return boxes;
+    }
+
+    public int getNbRows() {
+        return nbRows;
+    }
+
+    public int getNbColumns() {
+        return nbColumns;
+    }
+
 }
