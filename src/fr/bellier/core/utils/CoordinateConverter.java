@@ -16,7 +16,7 @@ public class CoordinateConverter {
     private static final CoordinateConverter INSTANCE = new CoordinateConverter();
 
     /*
-    Définition des systemes de coordonnées :
+    Definition des systemes de coordonnees :
         RC: R appartient[0..iSize-1]
             C appartient[0..jSize-1]
 
