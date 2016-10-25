@@ -33,23 +33,6 @@ public class CoordinateConverter {
      *  27 26 25 24 23 22 21
      */
     /**
-     * convert From RC to Ruban
-     *
-     * @param iSize ex = 4
-     * @param jSize ex = 7
-     * @param iCurrent
-     * @param jCurrent
-     * @return xCurrent
-     */
-    public int convertRCToRuban(int iSize, int jSize, int iCurrent, int jCurrent) {
-        if ((iCurrent % 2) == 0) {
-            return iCurrent * jSize + jCurrent;
-        } else {
-            return (iCurrent + 1) * jSize - (jCurrent + 1);
-        }
-    }
-
-    /**
      * convert From Index to Ruban or reverse
      *
      * @param iSize ex = 4
@@ -66,6 +49,19 @@ public class CoordinateConverter {
     }
 
     /**
+     * convert From Index to RC
+     *
+     * @param iSize ex=5
+     * @param jSize ex=7
+     * @param xCurrent
+     * @return [iCurrent,jCurrent]
+     */
+    public int[] convertIndexToRC(int iSize, int jSize, int xCurrent) {
+        int[] result = {xCurrent / jSize, xCurrent % jSize};
+        return result;
+    }
+
+    /**
      * convert From RC to Index
      *
      * @param iSize ex=5
@@ -79,15 +75,20 @@ public class CoordinateConverter {
     }
 
     /**
-     * convert From Index to RC
+     * convert From RC to Ruban
      *
-     * @param iSize ex=5
-     * @param jSize ex=7
-     * @param xCurrent
-     * @return [iCurrent,jCurrent]
+     * @param iSize ex = 4
+     * @param jSize ex = 7
+     * @param iCurrent
+     * @param jCurrent
+     * @return xCurrent
      */
-    public int[] convertIndexToRC(int iSize, int jSize, int xCurrent) {
-        int[] result = {xCurrent / jSize, xCurrent % jSize};
-        return result;
+    public int convertRCToRuban(int iSize, int jSize, int iCurrent, int jCurrent) {
+        if ((iCurrent % 2) == 0) {
+            return iCurrent * jSize + jCurrent;
+        } else {
+            return (iCurrent + 1) * jSize - (jCurrent + 1);
+        }
     }
+
 }

@@ -105,17 +105,20 @@ public class RandomGame {
 
     class NextStepThread extends Thread {
 
+        private int nbVertMin = 5;// max fois 2
+        private int delay = 250;
+
         @Override
         public void run() {
             int higher = availableBoxes.size();
             int idWinnerBox = (int) (Math.random() * higher);
-            int nbIntermediateBox = (int) (Math.random() * 10);
-            for (int i = 0; i < nbIntermediateBox + 10; i++) {
+            int nbIntermediateBox = (int) (Math.random() * nbVertMin);
+            for (int i = 0; i < nbIntermediateBox + nbVertMin; i++) {
                 int idCurrentBox = (int) (Math.random() * higher);
                 table.setBox(availableBoxes.get(idCurrentBox), Color.green);
                 table.notifyObservers(table.getBoxes());
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(delay);
                 } catch (InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }

@@ -30,6 +30,7 @@ public class ArtNetManager implements Observer {
 
     private Controller thisControler;
     private ArtNetServer artNetServer;
+    private static long lastUpdate;
 
     public ArtNetManager() {
         createControler();
@@ -116,7 +117,14 @@ public class ArtNetManager implements Observer {
 
     @Override
     public void update(Observable o, Object o1) {
+
+        long now = System.currentTimeMillis();
+        //System.out.print(now);
+        //if (lastUpdate + 400 < now) {
         ArtnetService service = ArtnetService.getInstance();
-        sendPacket("1", service.colorToByteArray((List<Box>) o1));
+        sendPacket("0", service.colorToByteArray((List<Box>) o1));
+        //lastUpdate = now;
+        //}
+        //System.out.println();
     }
 }

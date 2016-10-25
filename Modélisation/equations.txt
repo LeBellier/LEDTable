@@ -1,0 +1,7 @@
+﻿"Coté"= 33.333333
+"nbCarre"= 13
+"jeu"= 0.16
+"epaisseur"= 1.6
+"hauteur"= 47.5
+"rapportEncoche"= 0.5
+"CotéTable"= 543
