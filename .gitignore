@@ -10,3 +10,5 @@ target
 *.war
 *.ear
 /nbproject/
+/JAVAapp/dist/
+/JAVAapp/build/

@@ -1,27 +1,19 @@
-ArtNetStack
+Table à LED
 ===========
 
-Art-Net by Artistic Licence allows for broadcasting DMX data via IP/UDP.
-This library is implementing the basic protocol for Java applications.
+J'ai vu un collègue en faire , alors je me suis dit pour quoi pas moi.
 
-http://www.artisticlicence.com/WebSiteMaster/User%20Guides/art-net.pdf
+En résumer :
+  * J'ai utilisé des leds **NeoPixel** (ws2812b)
+  * Commandées par une carte électronique
+  * Commandée par un ESP-12E (MCU Node v1.0)
+  * Commandé par :
+	* Une interface web
+	* Une application PC, qui envoie des trame DMX en Wifi
 
-Currently supported core features are:
-  * **ArtPoll** Encode and Decode ArtPoll Packet
-  * **ArtPollReply** Encode ArtPollReply
-  * **ArtTimeCode** Encode and Decode ArtTimeCode
-  * **ArtDMX** Encode and Decode ArtDMX
 
-Currently supported events features are:
-  * **Art** ArtNet packet event catch
-  * **ArtPoll** ArtPoll event catch
-  * **ArtPollReply** ArtPollReply event catch
-  * **ArtTimeCode** ArtTimeCode event catch
-  * **ArtDMX** ArtDMX event catch
 
-  * **onTerminate** Server is die and disconnected
-  * **onConnect** Server has binding address
 
-Currently supported protocols are:
-  * **Broadcast** Broadcast protocol (100%)
-  * **Unicast** Unicast protocol (0%)
+
+
+a bientot pour plus d'information
