@@ -1,10 +1,10 @@
 void hasDebugDelay(int duration) {
-#ifdef DEBUG
+#ifdef DEBUG_INIT
   delay (duration);
 #endif
 }
 void hasDebug ( void (*fonc)() ) {
-#ifdef DEBUG
+#ifdef DEBUG_INIT
   Serial.begin(BAUDRATE);
   fonc ();
   //Serial.end();

@@ -17,13 +17,7 @@ void updateArtNet() {
   // we call the read function inside the loop
   artnet.read();
 }
-int convert1DTo1D( int xCurrent) {
-  if (((xCurrent / 13) % 2) == 0) {
-    return xCurrent;
-  } else {
-    return (xCurrent / 13 + 1) * 13 - (xCurrent % 13 + 1);
-  }
-}
+
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data) {
 
 #ifdef DEBUG

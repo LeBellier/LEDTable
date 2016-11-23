@@ -9,8 +9,8 @@ void initWIFILite() {
   char *ssid;
   char *password;
 
-  char * SSIDs[nbSSID] = {"Box-anous",  "LAppart", "freebox_fanny", "Zipo"};
-  char * passewords[nbSSID] = {"EEA6E591357C24A8EF92697C2A", "LaCiteDeLaPeur", "locura2016", "0645905188"};
+  char * SSIDs[nbSSID] = {"Box-anous",  "LAppart", "freebox_LJLFVE", "Zipo"};
+  char * passewords[nbSSID] = {"5A631D27C1F411A4CCD6D1C6FC", "LaCiteDeLaPeur", "poweroffrenchdiamonds2016", "0645905188"};
 
   boolean wifiFounded = false;
   // Set WiFi to station mode and disconnect from an AP if it was previously connected
@@ -44,7 +44,10 @@ void initWIFILite() {
         Serial.println ( ssid );
         Serial.print ( "IP address: " );
         Serial.println(ip);
+        blinkStrip(GREEN);
         break;
+      }else{
+        blinkStrip(RED);
       }
     }
   }

@@ -1,10 +1,12 @@
 #include "FS.h"
+#include "Pins.h"
 
 #include <ESP8266mDNS.h>
 #include <Adafruit_NeoPixel.h>
 #include <ArtnetWifi.h>
 
 //#define DEBUG
+#define DEBUG_INIT
 String fileName = "Progam: TestWebServerArtNet.ino";
 
 #include "GlobalVariables.h"
@@ -16,10 +18,15 @@ String fileName = "Progam: TestWebServerArtNet.ino";
 
 
 void setup ( void ) {
+
+
   pinMode ( led, OUTPUT );
   digitalWrite ( led, 0 );
   hasDebug (initStrip);
   initStripTest();
+
+  // fillChar('A', MAGENTA);
+  // delay(10000);
 
   hasDebug (initWIFILite);
   hasDebugDelay(15);

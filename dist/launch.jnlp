@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jnlp href="launch.jnlp" spec="1.0+">
+    <information>
+        <title>TableALed</title>
+        <vendor>bruno</vendor>
+        <homepage href=""/>
+        <description>TableALed</description>
+        <description kind="short">TableALed</description>
+    </information>
+    <update check="always"/>
+    <resources>
+        <j2se version="1.8+"/>
+        <jar href="JavaApplication1.jar" main="true"/>
+    </resources>
+    <application-desc main-class="fr.bellier.randomApp.RandomGame">
+    </application-desc>
+</jnlp>
