@@ -2,60 +2,14 @@
     <head>
         <title>Webpage NeoPixel Controller</title>
         <script>
-            /*    function GetButton1() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=0", true);
-             request.send(null);
-             }
-             function GetButton2() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=1", true);
-             request.send();
-             }
-
-             function GetButton3() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=2", true);
-             request.send(null);
-             }
-             function GetButton4() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=3", true);
-             request.send(null);
-             }
-             function GetButton5() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=4", true);
-             request.send(null);
-             }
-             function GetButton6() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=5", true);
-             request.send(null);
-             }
-
-             function GetButton7() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=6", true);
-             request.send(null);
-             }
-             function GetButton8() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=7", true);
-             request.send(null);
-             }
-             function GetButton9() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=8", true);
-             request.send(null);
-             }
-             */
             function clickButton(i) {
                 var request = new XMLHttpRequest();
                 request.open("GET", "pixel_animation=" + i, true);
                 request.send(null);
             }
         </script>
+        <link href="style.css" rel="stylesheet" />
+
     </head>
     <body>
         <h1>NeoPixel Controller<BR>_________________</h1>
@@ -69,12 +23,12 @@
             <button type="button" id="LED1" onclick="clickButton(1)">Pixels Red</button><br /><br />
             <button type="button" id="LED2" onclick="clickButton(2)">Pixels Green</button><br /><br />
             <button type="button" id="LED3" onclick="clickButton(3)">Pixels Blue</button><br /><br />
-            <button type="button" id="LED4" onclick="clickButton(4)">Pixel Animation 4</button><br /><br />
-            <button type="button" id="LED5" onclick="clickButton(5)">Pixel Animation 5</button><br /><br />
-            <button type="button" id="LED6" onclick="clickButton(6)">Police Light</button><br /><br />
-            <button type="button" id="LED7" onclick="clickButton(7)">Pixel Animation 7</button><br /><br />
-            <button type="button" id="LED8" onclick="clickButton(8)">Pixel Animation 8</button><br /><br />
-            <button type="button" id="LED9" onclick="clickButton(9)">Pixel Animation 9</button><br /><br />
+            <button type="button" id="LED4" onclick="clickButton(4)">White dots</button><br /><br />
+            <button type="button" id="LED5" onclick="clickButton(5)">Red dots</button><br /><br />
+            <button type="button" id="LED6" onclick="clickButton(6)">Blue dots</button><br /><br />
+            <button type="button" id="LED7" onclick="clickButton(7)">Rainbow</button><br /><br />
+            <button type="button" id="LED8" onclick="clickButton(8)">Rainbow cycle</button><br /><br />
+            <button type="button" id="LED9" onclick="clickButton(9)">Rainbow dots</button><br /><br />
         </form>
         <div bgcolor="#a0dFfe">
             <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
