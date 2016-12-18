@@ -4,6 +4,8 @@
 .checkstyle
 target
 *.class
+Jinx\autosave.dat
+options.dat
 
 # Package Files #
 *.jar
