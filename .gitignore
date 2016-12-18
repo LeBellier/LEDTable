@@ -1,20 +1,3 @@
-.project
-.classpath
-.settings
-.checkstyle
-target
-*.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
-/nbproject/
-/JAVAapp/dist/
-/JAVAapp/build/
-/WebAppTable/nbproject/private/
-/CodeArduino/_161207_UniquementWebServer/data/nbproject/private/
-
 # Jinx Personnal Files #
 /Jinx/autosave.dat
 /Jinx/options.dat
@@ -22,3 +5,14 @@ target
 
 # Arduino Personnal File #
 /CodeArduino/ESPTable/PersonnalData.h
+
+# Java app #
+/JAVAapp/build/
+/JAVAapp/dist/
+/JAVAapp/nbproject/private/
+*.class
+*.project
+.classpath
+.settings
+.checkstyle
+*.class
