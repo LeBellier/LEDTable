@@ -1,6 +1,8 @@
 /*
  * Standard strip test:
  *  switch in green one by one each NeoPixel.
+ *  
+ *  To know how to plug NeoPixels see pictures in /Pictures
  */
 
 #include <Adafruit_NeoPixel.h>
