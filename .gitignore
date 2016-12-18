@@ -14,4 +14,8 @@ target
 /JAVAapp/build/
 /WebAppTable/nbproject/private/
 /CodeArduino/_161207_UniquementWebServer/data/nbproject/private/
+
+# Jinx Personnal File #
 /Jinx/autosave.dat
+/Jinx/options.dat
+/Jinx/Perso/
