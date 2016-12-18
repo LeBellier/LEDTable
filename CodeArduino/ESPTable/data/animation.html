@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Webpage NeoPixel Controller</title>
+        <script>
+            function clickButton(i) {
+                var request = new XMLHttpRequest();
+                request.open("GET", "pixel_animation=" + i, true);
+                request.send(null);
+            }
+        </script>
+        <link href="style.css" rel="stylesheet" />
+
+    </head>
+    <body>
+        <h1>NeoPixel Controller<BR>_________________</h1>
+        <div>
+            <BR><BR><a href="/diag">Diagnostics Information Page</a><BR>
+        </div>
+        <h1>Choose Animation of LED's</h1>
+        <form id="txt_form" name="frmText">
+
+            <button type="button" id="LED0" onclick="clickButton(0)">Pixels Set to OFF</button><br /><br />
+            <button type="button" id="LED1" onclick="clickButton(1)">Pixels Red</button><br /><br />
+            <button type="button" id="LED2" onclick="clickButton(2)">Pixels Green</button><br /><br />
+            <button type="button" id="LED3" onclick="clickButton(3)">Pixels Blue</button><br /><br />
+            <button type="button" id="LED4" onclick="clickButton(4)">White dots</button><br /><br />
+            <button type="button" id="LED5" onclick="clickButton(5)">Red dots</button><br /><br />
+            <button type="button" id="LED6" onclick="clickButton(6)">Blue dots</button><br /><br />
+            <button type="button" id="LED7" onclick="clickButton(7)">Rainbow</button><br /><br />
+            <button type="button" id="LED8" onclick="clickButton(8)">Rainbow cycle</button><br /><br />
+            <button type="button" id="LED9" onclick="clickButton(9)">Rainbow dots</button><br /><br />
+        </form>
+        <div bgcolor="#a0dFfe">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+            <BR>Animated Neopixels ANY TYPE !<BR>
+        </div>
+        <p>
+            <BR>
+            <BR>
+            <FONT SIZE=-1>ESP8266 With 40 WS2812B LED's<BR>
+            <FONT SIZE=-2>Compiled Using ver. 1.6.5-1160-gef26c5f, built on Sep 30, 2015
+        </p>
+    </body>
