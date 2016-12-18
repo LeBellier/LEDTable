@@ -15,7 +15,10 @@ target
 /WebAppTable/nbproject/private/
 /CodeArduino/_161207_UniquementWebServer/data/nbproject/private/
 
-# Jinx Personnal File #
+# Jinx Personnal Files #
 /Jinx/autosave.dat
 /Jinx/options.dat
 /Jinx/Perso/
+
+# Arduino Personnal File #
+/CodeArduino/ESPTable/PersonnalData.h
