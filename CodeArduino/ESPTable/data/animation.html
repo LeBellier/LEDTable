@@ -1,55 +1,10 @@
 <html>
     <head>
+        <meta charset="UTF-8" />
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=No" name="viewport" />
         <title>Webpage NeoPixel Controller</title>
+        <link href="style.css" rel="stylesheet" />
         <script>
-            /*    function GetButton1() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=0", true);
-             request.send(null);
-             }
-             function GetButton2() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=1", true);
-             request.send();
-             }
-
-             function GetButton3() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=2", true);
-             request.send(null);
-             }
-             function GetButton4() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=3", true);
-             request.send(null);
-             }
-             function GetButton5() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=4", true);
-             request.send(null);
-             }
-             function GetButton6() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=5", true);
-             request.send(null);
-             }
-
-             function GetButton7() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=6", true);
-             request.send(null);
-             }
-             function GetButton8() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=7", true);
-             request.send(null);
-             }
-             function GetButton9() {
-             var request = new XMLHttpRequest();
-             request.open("GET", "pixel_inputs&LED3=8", true);
-             request.send(null);
-             }
-             */
             function clickButton(i) {
                 var request = new XMLHttpRequest();
                 request.open("GET", "pixel_animation=" + i, true);
@@ -59,32 +14,71 @@
     </head>
     <body>
         <h1>NeoPixel Controller<BR>_________________</h1>
-        <div>
-            <BR><BR><a href="/diag">Diagnostics Information Page</a><BR>
-        </div>
-        <h1>Choose Animation of LED's</h1>
-        <form id="txt_form" name="frmText">
+        <h2>Choose Animation of LED's</h2>
 
-            <button type="button" id="LED0" onclick="clickButton(0)">Pixels Set to OFF</button><br /><br />
-            <button type="button" id="LED1" onclick="clickButton(1)">Pixels Red</button><br /><br />
-            <button type="button" id="LED2" onclick="clickButton(2)">Pixels Green</button><br /><br />
-            <button type="button" id="LED3" onclick="clickButton(3)">Pixels Blue</button><br /><br />
-            <button type="button" id="LED4" onclick="clickButton(4)">Pixel Animation 4</button><br /><br />
-            <button type="button" id="LED5" onclick="clickButton(5)">Pixel Animation 5</button><br /><br />
-            <button type="button" id="LED6" onclick="clickButton(6)">Police Light</button><br /><br />
-            <button type="button" id="LED7" onclick="clickButton(7)">Pixel Animation 7</button><br /><br />
-            <button type="button" id="LED8" onclick="clickButton(8)">Pixel Animation 8</button><br /><br />
-            <button type="button" id="LED9" onclick="clickButton(9)">Pixel Animation 9</button><br /><br />
-        </form>
-        <div bgcolor="#a0dFfe">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-            <BR>Animated Neopixels ANY TYPE !<BR>
-        </div>
+        <table class="table">
+            <tr>
+                <td width="50%">
+                    <div align="center"><button class="cbtn" id="LED0" onclick="clickButton(0)">Pixels Set to OFF</button></div>
+                </td>
+                <td width="50%">
+                    <div align="center"><button class="cbtn" id="LED1" onclick="clickButton(1)">Pixels Red</button></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <div align="center"><button class="cbtn" id="LED2" onclick="clickButton(2)">Pixels Green</button></div>
+                </td>
+                <td width="50%">
+                    <div align="center"><button class="cbtn" id="LED3" onclick="clickButton(3)">Pixels Blue</button></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <div align="center"><button class="cbtn" id="LED4" onclick="clickButton(4)">White dots</button></div>
+                </td>
+                <td width="50%">
+                    <div align="center"><button class="cbtn" id="LED5" onclick="clickButton(5)">Red dots</button></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <div align="center"><button class="cbtn" id="LED6" onclick="clickButton(6)">Blue dots</button></div>
+                </td>
+                <td width="50%">
+                    <div align="center"><button class="cbtn" id="LED7" onclick="clickButton(7)">Rainbow</button></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <div align="center"><button class="cbtn" id="LED8" onclick="clickButton(8)">Rainbow cycle</button></div>
+                </td>
+                <td width="50%">
+                    <div align="center"><button class="cbtn" id="LED9" onclick="clickButton(9)">Rainbow dots</button></div>
+                </td>
+            </tr>
+        </table>
         <p>
-            <BR>
-            <BR>
-            <FONT SIZE=-1>ESP8266 With 40 WS2812B LED's<BR>
-            <FONT SIZE=-2>Compiled Using ver. 1.6.5-1160-gef26c5f, built on Sep 30, 2015
+            <BR><BR><a href="/index.html">Main Page</a><BR>
         </p>
+        <!--
+        <h2>
+            <BR>Animated Neopixels ANY TYPE !<BR>
+        </h2>
+        <h3>
+            ESP8266 With 40 WS2812B LED's<BR>
+        </h3>
+        <h4>
+            Compiled Using ver. 1.6.5-1160-gef26c5f, built on Sep 30, 2015<BR>
+        </h4>
+        <h5>
+            Compiled Using ver. 1.6.5-1160-gef26c5f, built on Sep 30, 2015<BR>
+        </h5>
+        <h6>
+            Compiled Using ver. 1.6.5-1160-gef26c5f, built on Sep 30, 2015<BR>
+        </h6>
+        <p>
+            Compiled Using ver. 1.6.5-1160-gef26c5f, built on Sep 30, 2015<BR>
+        </p>
+        -->
     </body>
-</html>
