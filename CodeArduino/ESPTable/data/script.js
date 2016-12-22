@@ -7,15 +7,6 @@ function btnSendPerformed() {
 function sendRequest(text) {
     document.getElementById("kk").innerHTML = text;
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            var chiffres = "0123456789ABCDEF";
-            var ledNb = xmlHttp.responseText.substr(1, 2);
-            var color = xmlHttp.responseText.substr(3, 7);
-            document.getElementById("led" + ledNb).setAttribute("style", "background-color: " + color + ";");
-            document.getElementById("led" + ledNb).innerHTML = color;
-        }
-    };
     xmlHttp.open("GET", "pixel_random=" + text, true);
     xmlHttp.send();
 }
