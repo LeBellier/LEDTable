@@ -3,8 +3,9 @@
    Bruno Bellier
 */
 
-//#define DEBUG
-//#define DEBUG_INIT
+#define FTP_DEBUG 
+#define DEBUG
+#define DEBUG_INIT
 String fileName = "Progam: ESPTable.ino";
 
 #include "FS.h"
