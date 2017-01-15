@@ -4,9 +4,12 @@
 // Prototypage
 #include <ESP8266mDNS.h>
 #include <ESP8266WebServer.h>
+#include <ESP8266FtpServer.h>
+
 void initDNS();
 void initWebServer();
-void updateWebServer();
+void initFtpServer();
+void updateServers();
 
 void handleNotFound();
 bool loadAnimation(String sPath);
@@ -14,6 +17,8 @@ bool loadFromSpiffs(String path);
 
 MDNSResponder mdns;
 ESP8266WebServer server(80);
+FtpServer ftpSrv;   //set #define FTP_DEBUG in ESP8266FtpServer.h to see ftp verbose on serial
+
 int showType = 0;
 bool animate = false;  // Web Button
 
@@ -32,9 +37,15 @@ void initWebServer() {
   server.begin();
   Serial.println("HTTP server started");
 }
-void updateWebServer() {
+void initFtpServer() {
+  if (SPIFFS.begin()) {
+    Serial.println("SPIFFS opened!");
+    ftpSrv.begin("esp8266", "esp8266");   //username, password for ftp.  set ports in ESP8266FtpServer.h  (default 21, 50009 for PASV)
+  }
+}
+void updateServers() {
   mdns.update();
-  // Check if a client has connected
+  ftpSrv.handleFTP();
   server.handleClient();
 }
 

@@ -30,11 +30,13 @@ void setup(void) {
   hasDebug(initDNS);
   hasDebugDelay(10);
   hasDebug(initWebServer);
+  hasDebugDelay(10);
+  hasDebug(initFtpServer);
 
   digitalWrite( led, 1);
 }
 void loop() {
-  updateWebServer();
+  updateServers();
   artnet.read();
   if (animate == true) {
     startShow(showType);
