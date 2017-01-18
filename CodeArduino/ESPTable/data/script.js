@@ -1,5 +1,5 @@
 function btnAllBlackPerformed() {
-    sendRequest("9C000000");
+    sendRequest("LEDnb=9C&R=00&G=00&B=00");
 }
 function btnSendPerformed() {
     sendRequest(createRequestColorForLed());
@@ -7,14 +7,17 @@ function btnSendPerformed() {
 function sendRequest(text) {
     document.getElementById("kk").innerHTML = text;
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "pixel_random=" + text, true);
+    xmlHttp.open("GET", "pixel?" + text, true);
     xmlHttp.send();
 }
 function createRequestColorForLed() {
-    var t = "";
+    var t = "LEDnb=";
     t = t + toHex(getRandomIntInclusive(0, 155));
+    t = t + "&R=";
     t = t + toHex(getRandomIntInclusive(0, 255));
+    t = t + "&G=";
     t = t + toHex(getRandomIntInclusive(0, 255));
+    t = t + "&G=";
     t = t + toHex(getRandomIntInclusive(0, 255));
     return t;
 }

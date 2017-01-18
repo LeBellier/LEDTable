@@ -6,28 +6,19 @@
 //#define FTP_DEBUG
 //#define DEBUG_ESP
 //#define DEBUG_INIT
-#include <Aspect.h>
-String fileName = "Progam: ESPTable.ino";
-
-#include "FS.h"
 
 #include "PersonnalData.h"
-//#include "ConstCharColor.h"
+#include <Aspect.h>
 #include <MatrixStrip.h>
-MatrixStrip strip(pixelPin, nbRows, nbColumns); // il faut les personnalData+GlobaleVariables+MatrixStrip
-
-#include "ArtNet.h"
-#include <WifiManager.h> // Aspect + espWIFI 
+MatrixStrip strip(pixelPin, nbRows, nbColumns); // il faut les personnalData + MatrixStrip
+#include <ServersWeb.h> // personnalData
+#include <WifiManager.h> // personnalData
+#include "ArtNet.h" // besoin du strip
 #include "PagesWeb.h"
-
-#include "Animations.h"
-#include "MethodesGenerale.h" // besoin de IPAdress
-
-
+#include "Animations.h"// besoin de IPAdress
 
 void setup(void) {
   Serial.begin(BAUDRATE);
-  Serial.print("Coucou");
 
   pinMode( led, OUTPUT);
   digitalWrite( led, 0);
@@ -37,14 +28,11 @@ void setup(void) {
   hasDebugDelay(15);
   artnet.setArtDmxCallback(onDmxFrame);
   artnet.begin();
-  initDNS();
-  hasDebugDelay(10);
-  initHttpServer();
-  hasDebugDelay(10);
-  initFtpServer();
+  initDnsHttpFtpServers();
+  httpServer.on("/pixel", HTTP_GET, pixelRequest);
+  hasDebugDelay(20);
 
   showIP(WiFi.localIP());
-
   digitalWrite( led, 1);
 }
 void loop() {
