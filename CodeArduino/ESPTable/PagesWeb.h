@@ -25,22 +25,23 @@ bool animate = false;  // Web Button
 // Déclaration
 void initDNS() {
   if (mdns.begin(dnsName, WiFi.localIP())) {
-    Serial.println("MDNS responder started");
-    Serial.print("You can use the name: http://");
-    Serial.print(dnsName);
-    Serial.println(".local/");
+    DEBUG_PRINTLN("MDNS responder started");
+    DEBUG_PRINT("You can use the name: http://");
+    DEBUG_PRINT(dnsName);
+    DEBUG_PRINTLN(".local/");
   }
 }
 void initWebServer() {
   SPIFFS.begin(); //start spiffs (spi file system)
   server.onNotFound(handleNotFound);
   server.begin();
-  Serial.println("HTTP server started");
+  DEBUG_INIT_PRINTLN("HTTP server started");
 }
 void initFtpServer() {
   if (SPIFFS.begin()) {
-    Serial.println("SPIFFS opened!");
-    ftpSrv.begin("esp8266", "esp8266");   //username, password for ftp.  set ports in ESP8266FtpServer.h  (default 21, 50009 for PASV)
+    DEBUG_INIT_PRINTLN("SPIFFS opened!");
+    ftpSrv.begin("esp8266", "esp8266"); //username, password for ftp.  set ports in ESP8266FtpServer.h  (default 21, 50009 for PASV)
+    DEBUG_INIT_PRINTLN("FTP server started; MdP:esp8266, User:esp8266");
   }
 }
 void updateServers() {
@@ -51,9 +52,7 @@ void updateServers() {
 
 void handleNotFound() {
   String uriAsked = server.uri();
-#ifdef DEBUG
-  Serial.println(uriAsked);
-#endif
+  DEBUG_PRINTLN(uriAsked);
 
   //check the request
   if (!loadFromSpiffs(server.uri()) && ! loadAnimation(server.uri())) { // no file at the uri found
@@ -68,9 +67,7 @@ void handleNotFound() {
       message += " NAME:" + server.argName(i) + "\n VALUE:" + server.arg(i) + "\n";
     }
     server.send(404, "text/plain", message);
-#ifdef DEBUG
-    Serial.println(message);
-#endif
+    DEBUG_INIT_PRINTLN(message);
   }
 }
 bool loadAnimation(String sPath) {
@@ -97,13 +94,14 @@ bool loadAnimation(String sPath) {
     response.concat('#');
     response.concat(sPath.substring(2, 8));
 
-#ifdef DEBUG
-    Serial.print( "Show color: " );
-    Serial.print(r); Serial.print( " " );
-    Serial.print(g); Serial.print( " " );
-    Serial.println(b);
-    Serial.println(response);
-#endif
+    DEBUG_PRINT("Show color: ");
+    DEBUG_PRINT(r);
+    DEBUG_PRINT(" ");
+    DEBUG_PRINT(g);
+    DEBUG_PRINT(" ");
+    DEBUG_PRINT(b);
+    DEBUG_PRINT(" Response:");
+    DEBUG_PRINT(response);
     server.send(200, "text/plain", response);
     return true;
   } else {
@@ -135,9 +133,7 @@ bool loadFromSpiffs(String path) {
 
   if (server.hasArg("download")) dataType = "application/octet-stream";
   if (server.streamFile(dataFile, dataType) != dataFile.size()) {
-#ifdef DEBUG
-    //Serial.println("Sent less data than expected!");
-#endif
+    DEBUG_PRINTLN("Sent less data than expected!");
     return false;
   }
   dataFile.close();

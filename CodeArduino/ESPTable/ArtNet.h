@@ -7,20 +7,20 @@ ArtnetWifi artnet;
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data) {
 
 #ifdef DEBUG
-  Serial.print("DMX: Univ: ");
-  Serial.print(universe, DEC);
-  Serial.print(", Seq: ");
-  Serial.print(sequence, DEC);
-  Serial.print(", Data (");
-  Serial.print(length, DEC);
-  Serial.print("): ");
+  DEBUG_PRINT("DMX: Univ: ");
+  DEBUG_PRINT(universe, DEC);
+  DEBUG_PRINT(", Seq: ");
+  DEBUG_PRINT(sequence, DEC);
+  DEBUG_PRINT(", Data (");
+  DEBUG_PRINT(length, DEC);
+  DEBUG_PRINT("): ");
 
   // send out the buffer
   for (int i = 0; i < length; i++) {
-    Serial.print(data[i], HEX);
-    Serial.print(" ");
+    DEBUG_PRINT(data[i], HEX);
+    DEBUG_PRINT(" ");
   }
-  Serial.println();
+  DEBUG_PRINTLN();
 #endif
 
   // read universe and put into the right part of the display buffer

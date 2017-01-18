@@ -5,8 +5,8 @@
         Author: bruno
 */
 
-#ifndef MATRIXSTRIP_H_
-#define MATRIXSTRIP_H_
+#ifndef MATRIXSTRIP_H
+#define MATRIXSTRIP_H
 
 #include <Adafruit_NeoPixel.h>
 
@@ -131,4 +131,4 @@ void MatrixStrip::fillNumber(byte positionScreen, char letter, uint32_t color) {
   show();
 }
 
-#endif /* MATRIXSTRIP_H_ */
+#endif /* MATRIXSTRIP_H */

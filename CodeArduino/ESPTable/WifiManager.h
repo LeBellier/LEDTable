@@ -32,18 +32,16 @@ void initWIFILite() {
       }
       if (wifiFounded) {
         WiFi.begin(ssid, password);
-        Serial.println("");
+        DEBUG_INIT_PRINTLN("");
         // Wait for connection
         while (WiFi.status() != WL_CONNECTED) {
           delay(500);
-          Serial.print(".");
         }
-        IPAddress ip = WiFi.localIP();
-        Serial.println("");
-        Serial.print("Connected to ");
-        Serial.println(ssid);
-        Serial.print("IP address: ");
-        Serial.println(ipToString(ip));
+        DEBUG_INIT_PRINTLN("");
+        DEBUG_INIT_PRINT("Connected to ");
+        DEBUG_INIT_PRINTLN(ssid);
+        DEBUG_INIT_PRINT("IP address: ");
+        DEBUG_INIT_PRINTLN(sIP);
         break;
       }
     }

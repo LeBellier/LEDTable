@@ -3,19 +3,20 @@
    Bruno Bellier
 */
 
-#define FTP_DEBUG 
-#define DEBUG
+#define FTP_DEBUG
+#define DEBUG_ESP
 #define DEBUG_INIT
 String fileName = "Progam: ESPTable.ino";
 
 #include "FS.h"
+#include "Aspect.h"
 #include "PersonnalData.h"
 #include "GlobalVariables.h"
 #include "MatrixStrip.h"
 #include "ArtNet.h"
 #include "WifiManager.h"
 #include "PagesWeb.h"
-#include "Aspect.h"
+
 #include "Animations.h"
 
 void setup(void) {
@@ -24,15 +25,15 @@ void setup(void) {
   digitalWrite( led, 0);
   strip.rgbBlink();
 
-  hasDebug(initWIFILite);
+  initWIFILite();
   hasDebugDelay(15);
   artnet.setArtDmxCallback(onDmxFrame);
   artnet.begin();
-  hasDebug(initDNS);
+  initDNS();
   hasDebugDelay(10);
-  hasDebug(initWebServer);
+  initWebServer();
   hasDebugDelay(10);
-  hasDebug(initFtpServer);
+  initFtpServer();
 
   digitalWrite( led, 1);
 }
