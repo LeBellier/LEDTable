@@ -6,19 +6,24 @@
 //#define FTP_DEBUG
 //#define DEBUG_ESP
 //#define DEBUG_INIT
-#include "Aspect.h"
+#include <Aspect.h>
 String fileName = "Progam: ESPTable.ino";
 
 #include "FS.h"
 
 #include "PersonnalData.h"
-#include "GlobalVariables.h"
-#include "MatrixStrip.h"
+//#include "ConstCharColor.h"
+#include <MatrixStrip.h>
+MatrixStrip strip(pixelPin, nbRows, nbColumns); // il faut les personnalData+GlobaleVariables+MatrixStrip
+
 #include "ArtNet.h"
-#include "WifiManager.h"
+#include <WifiManager.h> // Aspect + espWIFI 
 #include "PagesWeb.h"
 
 #include "Animations.h"
+#include "MethodesGenerale.h" // besoin de IPAdress
+
+
 
 void setup(void) {
   Serial.begin(BAUDRATE);
@@ -28,15 +33,17 @@ void setup(void) {
   digitalWrite( led, 0);
   strip.rgbBlink();
 
-  initWIFILite();
+  initWIFI();
   hasDebugDelay(15);
   artnet.setArtDmxCallback(onDmxFrame);
   artnet.begin();
   initDNS();
   hasDebugDelay(10);
-  initWebServer();
+  initHttpServer();
   hasDebugDelay(10);
   initFtpServer();
+
+  showIP(WiFi.localIP());
 
   digitalWrite( led, 1);
 }

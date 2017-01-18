@@ -5,9 +5,10 @@
 #include <ESP8266mDNS.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266FtpServer.h>
+#include <Aspect.h>
 
 void initDNS();
-void initWebServer();
+void initHttpServer();
 void initFtpServer();
 void updateServers();
 
@@ -31,7 +32,7 @@ void initDNS() {
     DEBUG_INIT_PRINTLN(".local/");
   }
 }
-void initWebServer() {
+void initHttpServer() {
   SPIFFS.begin(); //start spiffs (spi file system)
   server.onNotFound(handleNotFound);
   server.begin();
