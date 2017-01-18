@@ -25,10 +25,10 @@ bool animate = false;  // Web Button
 // Déclaration
 void initDNS() {
   if (mdns.begin(dnsName, WiFi.localIP())) {
-    DEBUG_PRINTLN("MDNS responder started");
-    DEBUG_PRINT("You can use the name: http://");
-    DEBUG_PRINT(dnsName);
-    DEBUG_PRINTLN(".local/");
+    DEBUG_INIT_PRINTLN("MDNS responder started");
+    DEBUG_INIT_PRINT("You can use the name: http://");
+    DEBUG_INIT_PRINT(dnsName);
+    DEBUG_INIT_PRINTLN(".local/");
   }
 }
 void initWebServer() {

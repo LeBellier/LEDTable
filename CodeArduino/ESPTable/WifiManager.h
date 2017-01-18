@@ -36,7 +36,9 @@ void initWIFILite() {
         // Wait for connection
         while (WiFi.status() != WL_CONNECTED) {
           delay(500);
+          DEBUG_INIT_PRINT(".");
         }
+        String sIP = WiFi.localIP().toString();
         DEBUG_INIT_PRINTLN("");
         DEBUG_INIT_PRINT("Connected to ");
         DEBUG_INIT_PRINTLN(ssid);
@@ -48,19 +50,13 @@ void initWIFILite() {
   }
 }
 
-String ipToString(IPAddress ip) {
-  String n = "";
+void showIP(IPAddress ip) {
   for (int i = 0; i < 3; i++) {
     String number = (String) (ip[i]);
     printNumber(i, number);
-    n += (ip[i]);
-    n += '.';
   }
   String number = (String) (ip[3]);
   printNumber(3, number);
-
-  n += ip[3];
-  return n;
 }
 void printNumber(int i, String number) {
   int len = number.length();

@@ -3,13 +3,14 @@
    Bruno Bellier
 */
 
-#define FTP_DEBUG
-#define DEBUG_ESP
-#define DEBUG_INIT
+//#define FTP_DEBUG
+//#define DEBUG_ESP
+//#define DEBUG_INIT
+#include "Aspect.h"
 String fileName = "Progam: ESPTable.ino";
 
 #include "FS.h"
-#include "Aspect.h"
+
 #include "PersonnalData.h"
 #include "GlobalVariables.h"
 #include "MatrixStrip.h"
@@ -20,6 +21,8 @@ String fileName = "Progam: ESPTable.ino";
 #include "Animations.h"
 
 void setup(void) {
+  Serial.begin(BAUDRATE);
+  Serial.print("Coucou");
 
   pinMode( led, OUTPUT);
   digitalWrite( led, 0);
