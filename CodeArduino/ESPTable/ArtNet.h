@@ -2,6 +2,7 @@
 #define ARTNET_H
 
 #include <ArtnetWifi.h>
+#include <Aspect.h>
 ArtnetWifi artnet;
 
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data) {

@@ -1,11 +1,11 @@
 #ifndef ANIMATIONS_H
 #define ANIMATIONS_H
 
+#include <ESP8266WiFi.h>
 // Prototypage
 
 // Show the selected animation
 void startShow(int i);
-
 // Fill the dots one after the other with a color
 void colorWipe(uint32_t c, uint8_t wait);
 void rainbow(uint8_t wait);
@@ -15,8 +15,8 @@ void rainbowCycle(uint8_t wait);
 void theaterChase(uint32_t c, uint8_t wait);
 //Theatre-style crawling lights with rainbow effect
 void theaterChaseRainbow(uint8_t wait);
-
 uint32_t Wheel(byte WheelPos);
+void showIP(IPAddress ip);
 
 const char spirale[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
                         13, 38, 39, 64, 65, 90, 91, 116, 117, 142, 143,
@@ -180,5 +180,14 @@ uint32_t Wheel(byte WheelPos) {
   }
   WheelPos -= 170;
   return strip.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+}
+
+void showIP(IPAddress ip) {
+  for (int i = 0; i < 3; i++) {
+    String number = (String) (ip[i]);
+    strip.printNumber(i, number);
+  }
+  String number = (String) (ip[3]);
+  strip.printNumber(3, number);
 }
 #endif
