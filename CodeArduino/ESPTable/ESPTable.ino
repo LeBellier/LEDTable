@@ -33,7 +33,12 @@ void setup(void) {
 	delayIfDebug(20);
 	httpServer.on("/pixel", HTTP_GET, pixelRequest);
 
-	showIP(WiFi.localIP());
+	if (WiFi.getMode() != WIFI_STA) {
+		showIP(WiFi.softAPIP());
+	} else {
+		showIP(WiFi.localIP());
+	}
+
 	digitalWrite( led, 1);
 }
 void loop() {
