@@ -1,46 +1,47 @@
 /*
-   Programme pour table à led
-   Bruno Bellier
-*/
+ Programme pour table à led
+ Bruno Bellier
+ */
 
 //#define FTP_DEBUG
 //#define DEBUG_ESP
 //#define DEBUG_INIT
+#include <Aspect.h>
 
 #include "PersonnalData.h"
-#include <Aspect.h>
 #include <MatrixStrip.h>
-MatrixStrip strip(pixelPin, nbRows, nbColumns); // il faut les personnalData + MatrixStrip
+// MatrixStrip strip(pixelPin, nbRows, nbColumns); // il faut les personnalData + MatrixStrip
+#include "Animations.h"// besoin de IPAdress
 #include <ServersWeb.h> // personnalData
 #include <WifiManager.h> // personnalData
 #include "ArtNet.h" // besoin du strip
 #include "PagesWeb.h"
-#include "Animations.h"// besoin de IPAdress
 
 void setup(void) {
-  Serial.begin(BAUDRATE);
+	Serial.begin(BAUDRATE);
 
-  pinMode( led, OUTPUT);
-  digitalWrite( led, 0);
-  strip.rgbBlink();
+	pinMode( led, OUTPUT);
+	digitalWrite( led, 0);
+	strip.rgbBlink();
 
-  initWIFI();
-  hasDebugDelay(15);
-  artnet.setArtDmxCallback(onDmxFrame);
-  artnet.begin();
-  initDnsHttpFtpServers();
-  httpServer.on("/pixel", HTTP_GET, pixelRequest);
-  hasDebugDelay(20);
+	initWIFI();
+	delayIfDebug(15);
 
-  showIP(WiFi.localIP());
-  digitalWrite( led, 1);
+	artnet.setArtDmxCallback(onDmxFrame);
+	artnet.begin();
+	initDnsHttpFtpServers();
+	delayIfDebug(20);
+	httpServer.on("/pixel", HTTP_GET, pixelRequest);
+
+	showIP(WiFi.localIP());
+	digitalWrite( led, 1);
 }
 void loop() {
-  updateServers();
-  artnet.read();
-  if (animate == true) {
-    startShow(showType);
-    animate = false;
-  }
+	updateServers();
+	artnet.read();
+	if (animate == true) {
+		startShow(showType);
+		animate = false;
+	}
 }
 
