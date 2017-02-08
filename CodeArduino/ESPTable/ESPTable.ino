@@ -29,7 +29,7 @@ void setup(void) {
 
   artnet.setArtDmxCallback(onDmxFrame);
   artnet.begin();
-  initDnsHttpFtpServers();
+  initDnsHttpFtpOtaServers();
   delayIfDebug(20);
   httpServer.on("/pixel", HTTP_GET, pixelRequest);
 

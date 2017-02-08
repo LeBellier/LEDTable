@@ -43,7 +43,7 @@ void pixelRequest() {
 		DEBUG_PRINT(" ");
 		DEBUG_PRINT(b);
 		DEBUG_PRINT(" Response:");
-		DEBUG_PRINT(response);
+		DEBUG_PRINTLN(response);
 		httpServer.send(200, "text/plain", response);
 	} else {
 		handleRequestOnFile();
