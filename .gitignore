@@ -20,3 +20,5 @@
 winscp556/WinSCP.ini
 *.cproject
 CodeArduino/ESPTable/.ino.cpp
+*.bin
+CodeArduino/ESPTable/update.bat
