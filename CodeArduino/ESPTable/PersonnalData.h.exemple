@@ -2,9 +2,9 @@
 #define PERSONNAL_DATA_H
 
 // Describe all Wifi you want for the table
-#define nbSSID 2
-char * SSIDs[nbSSID] = { "LAppart", "Nom du WIFI2" };
-char * passewords[nbSSID] = { "LeBellier", "PasseWord2" };
+const uint8_t nbSSID = 2;
+String SSIDs[nbSSID] = { "Nom du WIFI1", "Nom du WIFI2" };
+String passewords[nbSSID] = { "PasseWord1", "PasseWord2" };
 
 // Debug Speed
 #define BAUDRATE 115200

@@ -3,8 +3,8 @@
  Bruno Bellier
  */
 
-//#define FTP_DEBUG
-//#define DEBUG_ESP
+#define FTP_DEBUG
+#define DEBUG_ESP
 #define DEBUG_INIT
 #include <Aspect.h>
 
@@ -24,12 +24,13 @@ void setup(void) {
 	digitalWrite( led, 0);
 	strip.rgbBlink();
 
-	initWIFI();
+	initWIFI(nbSSID, SSIDs, passewords);
 	delayIfDebug(15);
 
 	artnet.setArtDmxCallback(onDmxFrame);
 	artnet.begin();
-	initDnsHttpFtpOtaServers();
+	initDnsHttpFtpOtaServers(dnsName, ftpUser, ftpPasseWord, otaHostName,
+			otaPasseWord);
 	delayIfDebug(20);
 	httpServer.on("/pixel", HTTP_GET, pixelRequest);
 
