@@ -6,19 +6,17 @@
 # Arduino Personnal File #
 /CodeArduino/ESPTable/PersonnalData.h
 
-# Java app et Eclipse files#
+# Java app et Eclipse files #
 /JAVAapp/build/
 /JAVAapp/dist/
 /JAVAapp/nbproject/private/
 /CodeArduino/ESPTable/Release/
-*.class
+/CodeArduino/ESPTable/.ino.cpp
 *.project
-.classpath
 .settings
-.checkstyle
-*.class
-winscp556/WinSCP.ini
 *.cproject
-CodeArduino/ESPTable/.ino.cpp
+
+# Others #
+winscp556/WinSCP.ini
 *.bin
 CodeArduino/ESPTable/update.bat
