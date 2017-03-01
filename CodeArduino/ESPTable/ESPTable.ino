@@ -42,6 +42,7 @@ void setup(void) {
 
 	digitalWrite( led, 1);
 }
+
 void loop() {
 	updateServers();
 	artnet.read();
@@ -49,5 +50,8 @@ void loop() {
 		startShow(showType);
 		animate = false;
 	}
+
+	telnetServeur.send("Telnet Test, millis: \r\n");
+
 }
 
