@@ -17,6 +17,8 @@
 #include "ArtNet.h" // besoin du strip
 #include "PagesWeb.h"
 
+unsigned long startTime = millis();
+
 void setup(void) {
 	Serial.begin(BAUDRATE);
 
@@ -25,13 +27,17 @@ void setup(void) {
 	strip.rgbBlink();
 
 	initWIFI(nbSSID, SSIDs, passewords);
-	delayIfDebug(15);
+#ifdef DEBUG_INIT
+	delay(15);
+#endif
 
 	artnet.setArtDmxCallback(onDmxFrame);
 	artnet.begin();
-	initDnsHttpFtpOtaServers(dnsName, ftpUser, ftpPasseWord, otaHostName,
+	initDnsHttpFtpOtaTelnetServers(dnsName, ftpUser, ftpPasseWord, otaHostName,
 			otaPasseWord);
-	delayIfDebug(20);
+#ifdef DEBUG_INIT
+	delay(20);
+#endif
 	httpServer.on("/pixel", HTTP_GET, pixelRequest);
 
 	if (WiFi.getMode() != WIFI_STA) {
@@ -51,7 +57,10 @@ void loop() {
 		animate = false;
 	}
 
-	telnetServeur.send("Telnet Test, millis: \r\n");
+	if (millis() - startTime > 5000) { // run every 5000 ms
+		startTime = millis();
+		telnetServeur.send("Telnet Test, millis: \r\n");
+	}
 
 }
 

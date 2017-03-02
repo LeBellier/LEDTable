@@ -36,14 +36,15 @@ void pixelRequest() {
 		response.concat(httpServer.arg(2));
 		response.concat(httpServer.arg(3));
 
-		DEBUG_PRINT("Show color: ");
-		DEBUG_PRINT(r);
-		DEBUG_PRINT(" ");
-		DEBUG_PRINT(g);
-		DEBUG_PRINT(" ");
-		DEBUG_PRINT(b);
-		DEBUG_PRINT(" Response:");
-		DEBUG_PRINTLN(response);
+		telnetServeur.send("Show color: ");
+		telnetServeur.send((String) r);
+		telnetServeur.send(" ");
+		telnetServeur.send((String) g);
+		telnetServeur.send(" ");
+		telnetServeur.send((String) b);
+		telnetServeur.send(" Response:");
+		telnetServeur.send(response);
+		telnetServeur.send("\n\r");
 		httpServer.send(200, "text/plain", response);
 	} else {
 		handleRequestOnFile();

@@ -8,7 +8,7 @@ ArtnetWifi artnet;
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence,
 		uint8_t* data) {
 
-#ifdef DEBUG
+#ifdef DEBUG_ESP
 	DEBUG_PRINT("DMX: Univ: ");
 	DEBUG_PRINT(universe, DEC);
 	DEBUG_PRINT(", Seq: ");
@@ -22,7 +22,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence,
 		DEBUG_PRINT(data[i], HEX);
 		DEBUG_PRINT(" ");
 	}
-	DEBUG_PRINTLN();
+	DEBUG_PRINT("\n");
 #endif
 
 	// read universe and put into the right part of the display buffer
