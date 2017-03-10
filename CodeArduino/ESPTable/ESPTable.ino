@@ -20,7 +20,6 @@ void pixelRequest(); // To assign one color on one LED and show animation
 void handleRequestOnFile() {
 	serverManager.handleRequestFile();
 }
-
 unsigned long startTime = millis();
 
 void setup(void) {
@@ -42,8 +41,8 @@ void setup(void) {
 #ifdef DEBUG_INIT
 	delay(20);
 #endif
-	serverManager.getHttpServer().onNotFound(handleRequestOnFile);
-	serverManager.getHttpServer().on("/pixel", HTTP_GET, pixelRequest);
+	serverManager.httpServer.onNotFound(handleRequestOnFile);
+	serverManager.httpServer.on("/pixel", HTTP_GET, pixelRequest);
 
 	if (WiFi.getMode() != WIFI_STA) {
 		showIP(WiFi.softAPIP());
@@ -71,22 +70,21 @@ void loop() {
 }
 
 void pixelRequest() {
-	ESP8266WebServer httpServer = serverManager.getHttpServer();
-
-	if (httpServer.hasArg("animation")) {
-		showType = httpServer.arg(0).toInt();
+	//ESP8266WebServer* ptrHttpServer = serverManager.getHttpServer();
+	if (serverManager.httpServer.hasArg("animation")) {
+		showType = serverManager.httpServer.arg(0).toInt();
 		animate = true;
-		httpServer.send(200);
-	} else if (httpServer.hasArg("LEDnb")) {
+		serverManager.httpServer.send(200);
+	} else if (serverManager.httpServer.hasArg("LEDnb")) {
 		String chiffres = "0123456789ABCDEF";
-		int ledNb = chiffres.indexOf(httpServer.arg(0).charAt(0)) * 16
-				+ chiffres.indexOf(httpServer.arg(0).charAt(1));
-		int r = chiffres.indexOf(httpServer.arg(1).charAt(0)) * 16
-				+ chiffres.indexOf(httpServer.arg(1).charAt(1));
-		int g = chiffres.indexOf(httpServer.arg(2).charAt(0)) * 16
-				+ chiffres.indexOf(httpServer.arg(2).charAt(1));
-		int b = chiffres.indexOf(httpServer.arg(3).charAt(0)) * 16
-				+ chiffres.indexOf(httpServer.arg(3).charAt(1));
+		int ledNb = chiffres.indexOf(serverManager.httpServer.arg(0).charAt(0)) * 16
+				+ chiffres.indexOf(serverManager.httpServer.arg(0).charAt(1));
+		int r = chiffres.indexOf(serverManager.httpServer.arg(1).charAt(0)) * 16
+				+ chiffres.indexOf(serverManager.httpServer.arg(1).charAt(1));
+		int g = chiffres.indexOf(serverManager.httpServer.arg(2).charAt(0)) * 16
+				+ chiffres.indexOf(serverManager.httpServer.arg(2).charAt(1));
+		int b = chiffres.indexOf(serverManager.httpServer.arg(3).charAt(0)) * 16
+				+ chiffres.indexOf(serverManager.httpServer.arg(3).charAt(1));
 		if (ledNb == 156) {
 			strip.setColor(r, g, b);
 		} else {
@@ -94,11 +92,11 @@ void pixelRequest() {
 			strip.show();
 		}
 		String response = "";
-		response.concat(httpServer.arg(0));
+		response.concat(serverManager.httpServer.arg(0));
 		response.concat('#');
-		response.concat(httpServer.arg(1));
-		response.concat(httpServer.arg(2));
-		response.concat(httpServer.arg(3));
+		response.concat(serverManager.httpServer.arg(1));
+		response.concat(serverManager.httpServer.arg(2));
+		response.concat(serverManager.httpServer.arg(3));
 
 		serverManager.printDebug("Show color: ");
 		serverManager.printDebug((String) r);
@@ -108,7 +106,7 @@ void pixelRequest() {
 		serverManager.printDebug((String) b);
 		serverManager.printDebug(" Response:");
 		serverManager.printlnDebug(response);
-		httpServer.send(200, "text/plain", response);
+		serverManager.httpServer.send(200, "text/plain", response);
 	} else {
 		serverManager.handleRequestFile();
 	}
