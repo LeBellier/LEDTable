@@ -36,8 +36,8 @@ void setup(void) {
 
 	artnet.setArtDmxCallback(onDmxFrame);
 	artnet.begin();
-	serverManager.initDnsHttpFtpOtaTelnetServers(dnsName, ftpUser, ftpPasseWord,
-			otaHostName, otaPasseWord);
+	serverManager.initDnsHttpFtpOtaTelnetServers(hostName, hostName, passeWord,
+			hostName, passeWord);
 #ifdef DEBUG_INIT
 	delay(20);
 #endif
