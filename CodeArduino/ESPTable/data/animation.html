@@ -2,19 +2,13 @@
     <head>
         <meta charset="UTF-8" />
         <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=No" name="viewport" />
-        <title>Webpage NeoPixel Controller</title>
+        <title>Animation Launcher</title>
         <link href="style.css" rel="stylesheet" />
-        <script>
-            function clickButton(i) {
-                var request = new XMLHttpRequest();
-                request.open("GET", "pixel?animation=" + i, true);
-                request.send(null);
-            }
-        </script>
+        <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
         <h1>NeoPixel Controller<BR>_________________</h1>
-        <h2>Choose Animation of LED's</h2>
+        <h2>Choose LED Animation</h2>
 
         <table class="table">
             <tr>
@@ -58,6 +52,40 @@
                 </td>
             </tr>
         </table>
+		<h2>Or Choose LED's Animation here</h2>
+		<form name="theForm">
+			<fieldset>
+				<legend>Votre souhait</legend> <!-- Titre du fieldset -->
+				<p>
+					Faites un souhait que vous voudriez voir exaucé :
+					<!--Dans le requete cest value-->
+					<input type="radio" name="animation" value="0" id="0" /> <label for="0">Spirale Noire</label>
+					<input type="radio" name="animation" value="1" id="1" /> <label for="1">Spirale Rouge</label>
+					<input type="radio" name="animation" value="2" id="2" /> <label for="2">Spirale Verte</label>
+					<input type="radio" name="animation" value="3" id="3" /> <label for="3">Spirale Bleue</label>
+					<input type="radio" name="animation" value="4" id="4" /> <label for="4">Points blanc</label>
+					<input type="radio" name="animation" value="5" id="5" /> <label for="5">Points Rouge</label>
+					<input type="radio" name="animation" value="6" id="6" /> <label for="6">Points Bleu</label>
+					<input type="radio" name="animation" value="7" id="7" /> <label for="7">Arc en Ciel</label>
+					<input type="radio" name="animation" value="8" id="8" /> <label for="8">Spirale Arc en Ciel </label>
+					<input type="radio" name="animation" value="9" id="9" /> <label for="9">Points Arc en Ciel </label>
+					
+				</p>
+			</fieldset>
+
+			<fieldset>
+				<legend>Vos coordonnées</legend> <!-- Titre du fieldset --> 
+
+				<label for="light">Quel puissance lumineuse?</label>
+				<input type="range" name="light" id="light" min="0" max="100" value="100" />
+
+				<label for="cycle">Par sur combien de cycle?</label>
+				<input type="number" name="cycle" id="cycle" min="1" value="5"/>
+
+			</fieldset>
+			<input type="button" name="submit"value="Envoyer" onClick="get_action(theForm)" />
+		</form>
+		
         <p>
             <BR><BR><a href="/index.html">Main Page</a><BR>
         </p>

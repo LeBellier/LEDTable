@@ -4,21 +4,27 @@
 #include <ESP8266WiFi.h>
 // Prototypage
 MatrixStrip strip(pixelPin, nbRows, nbColumns); // il faut les personnalData + MatrixStrip
-int showType = 0;
+
+struct Animation {
+	int showType;
+	int light;
+	int cycle;
+};
+
 bool animate = false;  // Web Button
 
 // Show the selected animation
-void startShow(int i);
+void startShow(Animation);
 // Fill the dots one after the other with a color
 void colorWipe(uint32_t c, uint8_t wait);
-void rainbow(uint8_t wait);
+void rainbow(uint8_t wait, uint8_t cycle, uint8_t light);
 // Slightly different, this makes the rainbow equally distributed throughout
-void rainbowCycle(uint8_t wait);
+void rainbowCycle(uint8_t wait, uint8_t cycle, uint8_t light);
 //Theatre-style crawling lights.
 void theaterChase(uint32_t c, uint8_t wait);
 //Theatre-style crawling lights with rainbow effect
-void theaterChaseRainbow(uint8_t wait);
-uint32_t Wheel(byte WheelPos);
+void theaterChaseRainbow(uint8_t wait, uint8_t light);
+uint32_t Wheel(uint8_t wheelPos, uint8_t light);
 void showIP(IPAddress ip);
 
 const char spirale[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 38, 39,
@@ -44,40 +50,42 @@ const char spirale2[] = { 12, 13, 38, 39, 64, 65, 90, 91, 116, 117, 142, 143,
 
 // Déclaration
 
-void startShow(int i) {
-	switch (i) {
+void startShow(Animation anim) {
+	switch (anim.showType) {
 	case 0:
 		colorWipe(strip.Color(0, 0, 0), 50);    // Black/off
-		animate = false;
 		break;
 	case 1:
-		colorWipe(strip.Color(255, 0, 0), 50);  // Red
+		colorWipe(strip.Color(255 * anim.light / 100, 0, 0), 50);  // Red
 		break;
 	case 2:
-		colorWipe(strip.Color(0, 255, 0), 50);  // Green
+		colorWipe(strip.Color(0, 255 * anim.light / 100, 0), 50);  // Green
 		break;
 	case 3:
-		colorWipe(strip.Color(0, 0, 255), 50);  // Blue
+		colorWipe(strip.Color(0, 0, 255 * anim.light / 100), 50);  // Blue
 		break;
 	case 4:
-		theaterChase(strip.Color(127, 127, 127), 50); // White
+		theaterChase(
+				strip.Color(255 * anim.light / 100, 255 * anim.light / 100,
+						255 * anim.light / 100), 50); // White
 		break;
 	case 5:
-		theaterChase(strip.Color(127, 0, 0), 50); // Red
+		theaterChase(strip.Color(255 * anim.light / 100, 0, 0), 50); // Red
 		break;
 	case 6:
-		theaterChase(strip.Color(0, 0, 127), 50); // Blue
+		theaterChase(strip.Color(0, 0, 255 * anim.light / 100), 50); // Blue
 		break;
 	case 7:
-		rainbow(20);
+		rainbow(20, anim.cycle, anim.light);
 		break;
 	case 8:
-		rainbowCycle(20);
+		rainbowCycle(20, anim.cycle, anim.light);
 		break;
 	case 9:
-		theaterChaseRainbow(50);
+		theaterChaseRainbow(50, anim.light);
 		break;
 	}
+	animate = false;
 }
 
 // Fill the dots one after the other with a color
@@ -89,12 +97,12 @@ void colorWipe(uint32_t c, uint8_t wait) {
 	}
 }
 
-void rainbow(uint8_t wait) {
+void rainbow(uint8_t wait, uint8_t cycle, uint8_t light) {
 	uint16_t i, j;
 
-	for (j = 0; j < 256; j++) {
+	for (j = 0; j < 256 * cycle; j++) {
 		for (i = 0; i < strip.numPixels(); i++) {
-			strip.setPixelColor(i, Wheel((i + j) & 255));
+			strip.setPixelColor(i, Wheel((i + j) & 255, light));
 		}
 		strip.show();
 		delay(wait);
@@ -102,13 +110,13 @@ void rainbow(uint8_t wait) {
 }
 
 // Slightly different, this makes the rainbow equally distributed throughout
-void rainbowCycle(uint8_t wait) {
+void rainbowCycle(uint8_t wait, uint8_t cycle, uint8_t light) {
 	uint16_t i, j;
 
-	for (j = 0; j < 256 * 5; j++) { // 5 cycles of all colors on wheel
+	for (j = 0; j < 256 * cycle; j++) { // 5 cycles of all colors on wheel
 		for (i = 0; i < strip.numPixels(); i++) {
 			strip.setPixelColor(spirale2[i],
-					Wheel(((i * 256 / strip.numPixels()) + j) & 255));
+					Wheel(((i * 256 / strip.numPixels()) + j) & 255, light));
 		}
 		strip.show();
 		delay(wait);
@@ -134,11 +142,11 @@ void theaterChase(uint32_t c, uint8_t wait) {
 }
 
 //Theatre-style crawling lights with rainbow effect
-void theaterChaseRainbow(uint8_t wait) {
+void theaterChaseRainbow(uint8_t wait, uint8_t light) {
 	for (int j = 0; j < 256; j++) {   // cycle all 256 colors in the wheel
 		for (int q = 0; q < 3; q++) {
 			for (int i = 0; i < strip.numPixels(); i = i + 3) {
-				strip.setPixelColor(i + q, Wheel((i + j) % 255)); //turn every third pixel on
+				strip.setPixelColor(i + q, Wheel((i + j) % 255, light)); //turn every third pixel on
 			}
 			strip.show();
 
@@ -153,17 +161,26 @@ void theaterChaseRainbow(uint8_t wait) {
 
 // Input a value 0 to 255 to get a color value.
 // The colours are a transition r - g - b - back to r.
-uint32_t Wheel(byte WheelPos) {
-	WheelPos = 255 - WheelPos;
-	if (WheelPos < 85) {
-		return strip.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+uint8_t calcWheel(uint8_t wheelPos, uint8_t light) {
+	return wheelPos * 3 * light / 100;
+}
+uint8_t calc255Wheel(uint8_t wheelPos, uint8_t light) {
+	return (255 - wheelPos * 3) * light / 100;
+}
+uint32_t Wheel(uint8_t wheelPos, uint8_t light) {
+	wheelPos = 255 - wheelPos;
+	if (wheelPos < 85) {
+		return strip.Color(calc255Wheel(wheelPos, light), 0,
+				calcWheel(wheelPos, light));
 	}
-	if (WheelPos < 170) {
-		WheelPos -= 85;
-		return strip.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+	if (wheelPos < 170) {
+		wheelPos -= 85;
+		return strip.Color(0, calcWheel(wheelPos, light),
+				calc255Wheel(wheelPos, light));
 	}
-	WheelPos -= 170;
-	return strip.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+	wheelPos -= 170;
+	return strip.Color(calcWheel(wheelPos, light), calc255Wheel(wheelPos, light),
+			0);
 }
 
 void showIP(IPAddress ip) {

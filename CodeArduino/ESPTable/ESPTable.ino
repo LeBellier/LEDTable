@@ -3,14 +3,15 @@
  Bruno Bellier
  */
 
-#define FTP_DEBUG
-#define DEBUG_ESP
+//#define FTP_DEBUG
+//#define DEBUG_ESP
 #define DEBUG_INIT
 #include <Aspect.h>
 
 #include "PersonnalData.h"
 #include <MatrixStrip.h>
 #include "Animations.h"// besoin de IPAdress
+Animation anim;
 #include <ServerManager.h> // personnalData
 ServerManager serverManager;
 #include <WifiManager.h> // personnalData
@@ -36,8 +37,8 @@ void setup(void) {
 
 	artnet.setArtDmxCallback(onDmxFrame);
 	artnet.begin();
-	serverManager.initDnsHttpFtpOtaTelnetServers(dnsName, ftpUser, ftpPasseWord,
-			otaHostName, otaPasseWord);
+	serverManager.initDnsHttpFtpOtaTelnetServers(hostName, hostName, passeWord,
+			hostName, passeWord);
 #ifdef DEBUG_INIT
 	delay(20);
 #endif
@@ -57,22 +58,17 @@ void loop() {
 	serverManager.updateServers();
 	artnet.read();
 	if (animate == true) {
-		startShow(showType);
+		startShow(anim);
 		animate = false;
 	}
-
-	if (millis() - startTime > 5000) { // run every 5000 ms
-		startTime = millis();
-		serverManager.printDebug("Telnet Test, millis:");
-		serverManager.printlnDebug((String) startTime);
-	}
-
 }
 
 void pixelRequest() {
-	//ESP8266WebServer* ptrHttpServer = serverManager.getHttpServer();
+	serverManager.printlnDebug(serverManager.printRequest());
 	if (serverManager.httpServer.hasArg("animation")) {
-		showType = serverManager.httpServer.arg(0).toInt();
+		anim.showType = serverManager.httpServer.arg("animation").toInt();
+		anim.light = serverManager.httpServer.arg("light").toInt();
+		anim.cycle = serverManager.httpServer.arg("cycle").toInt();
 		animate = true;
 		serverManager.httpServer.send(200);
 	} else if (serverManager.httpServer.hasArg("LEDnb")) {
