@@ -6,12 +6,9 @@
 MatrixStrip strip(pixelPin, nbRows, nbColumns); // il faut les personnalData + MatrixStrip
 
 struct Animation {
-	int showType;
-	int light;
-	int cycle;
+	bool animate;
+	int showType, light, cycle;
 };
-
-bool animate = false;  // Web Button
 
 // Show the selected animation
 void startShow(Animation);
@@ -51,41 +48,43 @@ const char spirale2[] = { 12, 13, 38, 39, 64, 65, 90, 91, 116, 117, 142, 143,
 // Déclaration
 
 void startShow(Animation anim) {
-	switch (anim.showType) {
-	case 0:
-		colorWipe(strip.Color(0, 0, 0), 50);    // Black/off
-		break;
-	case 1:
-		colorWipe(strip.Color(255 * anim.light / 100, 0, 0), 50);  // Red
-		break;
-	case 2:
-		colorWipe(strip.Color(0, 255 * anim.light / 100, 0), 50);  // Green
-		break;
-	case 3:
-		colorWipe(strip.Color(0, 0, 255 * anim.light / 100), 50);  // Blue
-		break;
-	case 4:
-		theaterChase(
-				strip.Color(255 * anim.light / 100, 255 * anim.light / 100,
-						255 * anim.light / 100), 50); // White
-		break;
-	case 5:
-		theaterChase(strip.Color(255 * anim.light / 100, 0, 0), 50); // Red
-		break;
-	case 6:
-		theaterChase(strip.Color(0, 0, 255 * anim.light / 100), 50); // Blue
-		break;
-	case 7:
-		rainbow(20, anim.cycle, anim.light);
-		break;
-	case 8:
-		rainbowCycle(20, anim.cycle, anim.light);
-		break;
-	case 9:
-		theaterChaseRainbow(50, anim.light);
-		break;
+	if (anim.animate == true) {
+		switch (anim.showType) {
+		case 0:
+			colorWipe(strip.Color(0, 0, 0), 50);    // Black/off
+			break;
+		case 1:
+			colorWipe(strip.Color(255 * anim.light / 100, 0, 0), 50);  // Red
+			break;
+		case 2:
+			colorWipe(strip.Color(0, 255 * anim.light / 100, 0), 50);  // Green
+			break;
+		case 3:
+			colorWipe(strip.Color(0, 0, 255 * anim.light / 100), 50);  // Blue
+			break;
+		case 4:
+			theaterChase(
+					strip.Color(255 * anim.light / 100, 255 * anim.light / 100,
+							255 * anim.light / 100), 50); // White
+			break;
+		case 5:
+			theaterChase(strip.Color(255 * anim.light / 100, 0, 0), 50); // Red
+			break;
+		case 6:
+			theaterChase(strip.Color(0, 0, 255 * anim.light / 100), 50); // Blue
+			break;
+		case 7:
+			rainbow(20, anim.cycle, anim.light);
+			break;
+		case 8:
+			rainbowCycle(20, anim.cycle, anim.light);
+			break;
+		case 9:
+			theaterChaseRainbow(50, anim.light);
+			break;
+		}
+		anim.animate = false;
 	}
-	animate = false;
 }
 
 // Fill the dots one after the other with a color

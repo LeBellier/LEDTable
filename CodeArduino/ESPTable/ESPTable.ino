@@ -57,10 +57,8 @@ void setup(void) {
 void loop() {
 	serverManager.updateServers();
 	artnet.read();
-	if (animate == true) {
-		startShow(anim);
-		animate = false;
-	}
+	startShow(anim);
+
 }
 
 void pixelRequest() {
@@ -69,7 +67,7 @@ void pixelRequest() {
 		anim.showType = serverManager.httpServer.arg("animation").toInt();
 		anim.light = serverManager.httpServer.arg("light").toInt();
 		anim.cycle = serverManager.httpServer.arg("cycle").toInt();
-		animate = true;
+		anim.animate = true;
 		serverManager.httpServer.send(200);
 	} else if (serverManager.httpServer.hasArg("LEDnb")) {
 		String chiffres = "0123456789ABCDEF";
