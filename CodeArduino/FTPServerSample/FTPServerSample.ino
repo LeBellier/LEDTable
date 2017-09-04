@@ -17,10 +17,10 @@ void configModeCallback (WiFiManager *myWiFiManager) {
 }
 
 
-void setup(void){
+void setup(void) {
   // put your setup code here, to run once:
   Serial.begin(115200);
-  
+
   //WiFiManager
   //Local intialization. Once its business is done, there is no need to keep it around
   WiFiManager wifiManager;
@@ -34,25 +34,25 @@ void setup(void){
   //if it does not connect it starts an access point with the specified name
   //here  "AutoConnectAP"
   //and goes into a blocking loop awaiting configuration
-  if(!wifiManager.autoConnect()) {
+  if (!wifiManager.autoConnect()) {
     Serial.println("failed to connect and hit timeout");
     //reset and try again, or maybe put it to deep sleep
     ESP.reset();
     delay(1000);
-  } 
+  }
 
   //if you get here you have connected to the WiFi
   Serial.println("connected...yeey :)");
 
   /////FTP Setup, ensure SPIFFS is started before ftp;  /////////
-  
+
   if (SPIFFS.begin()) {
-      Serial.println("SPIFFS opened!");
-      ftpSrv.begin("esp8266","esp8266");    //username, password for ftp.  set ports in ESP8266FtpServer.h  (default 21, 50009 for PASV)
-  }    
+    Serial.println("SPIFFS opened!");
+    ftpSrv.begin("esp8266", "esp8266");   //username, password for ftp.  set ports in ESP8266FtpServer.h  (default 21, 50009 for PASV)
+  }
 }
 
-void loop(void){
-  ftpSrv.handleFTP();        //make sure in loop you call handleFTP()!!  
- 
+void loop(void) {
+  ftpSrv.handleFTP();        //make sure in loop you call handleFTP()!!
+
 }
