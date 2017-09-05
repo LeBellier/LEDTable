@@ -1,9 +1,10 @@
 #ifndef ANIMATIONS_H
 #define ANIMATIONS_H
 
-#include <ESP8266WiFi.h>
+
+#include "tal.h"
 // Prototypage
-MatrixStrip strip(pixelPin, nbRows, nbColumns); // il faut les personnalData + MatrixStrip
+
 
 struct Animation {
 	bool animate;
