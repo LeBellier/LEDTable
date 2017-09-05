@@ -8,11 +8,7 @@
 #ifndef TAL_H_
 #define TAL_H_
 
-//#define FTP_DEBUG
-//#define DEBUG_ESP
-#define DEBUG_INIT
 
-#include <Aspect.h>
 
 //#include <FS.h>
 //#include <ESP8266FtpServer.h>

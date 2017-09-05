@@ -41,10 +41,10 @@ void setup(void) {
 #ifdef DEBUG_INIT
 	delay(15);
 #endif
-
 	artnet.setArtDmxCallback(onDmxFrame);
 	artnet.begin();
-	svrs.setServersON(0b11111);
+	svrs.setServersON(B11111);
+
 #ifdef DEBUG_INIT
 	delay(20);
 #endif
@@ -68,55 +68,46 @@ void loop() {
 }
 
 void pixelRequest() {
-	/*	svrs_printlnDebug(svrs_printRequest());
-	 if (svrs.httpServer->hasArg("animation")) {
-	 anim.showType = svrs.httpServer->arg("animation").toInt();
-	 anim.light = svrs.httpServer->arg("light").toInt();
-	 anim.cycle = svrs.httpServer->arg("cycle").toInt();
-	 anim.animate = true;
-	 svrs.httpServer->send(200);
-	 } else if (svrs.httpServer->hasArg("LEDnb")) {
-	 String chiffres = "0123456789ABCDEF";
-	 int ledNb = chiffres.indexOf(svrs.httpServer->arg(0).charAt(0)) * 16
-	 + chiffres.indexOf(svrs.httpServer->arg(0).charAt(1));
-	 int r = chiffres.indexOf(svrs.httpServer->arg(1).charAt(0)) * 16
-	 + chiffres.indexOf(svrs.httpServer->arg(1).charAt(1));
-	 int g = chiffres.indexOf(svrs.httpServer->arg(2).charAt(0)) * 16
-	 + chiffres.indexOf(svrs.httpServer->arg(2).charAt(1));
-	 int b = chiffres.indexOf(svrs.httpServer->arg(3).charAt(0)) * 16
-	 + chiffres.indexOf(svrs.httpServer->arg(3).charAt(1));
-	 if (ledNb == 156) {
-	 strip.setColor(r, g, b);
-	 } else {
-	 strip.setMatrixPixelColor(ledNb, r, g, b);
-	 strip.show();
-	 }
-	 String response = "";
-	 response.concat(svrs.httpServer->arg(0));
-	 response.concat('#');
-	 response.concat(serverManager.httpServer.arg(1));
-	 response.concat(serverManager.httpServer.arg(2));
-	 response.concat(serverManager.httpServer.arg(3));
+	svrs.printDebug(svrs.printRequest());
+	if (svrs.httpSvr->hasArg("animation")) {
+		anim.showType = svrs.httpSvr->arg("animation").toInt();
+		anim.light = svrs.httpSvr->arg("light").toInt();
+		anim.cycle = svrs.httpSvr->arg("cycle").toInt();
+		anim.animate = true;
+		svrs.httpSvr->send(200);
+	} else if (svrs.httpSvr->hasArg("LEDnb")) {
+		String chiffres = "0123456789ABCDEF";
+		int ledNb = chiffres.indexOf(svrs.httpSvr->arg(0).charAt(0)) * 16
+				+ chiffres.indexOf(svrs.httpSvr->arg(0).charAt(1));
+		int r = chiffres.indexOf(svrs.httpSvr->arg(1).charAt(0)) * 16
+				+ chiffres.indexOf(svrs.httpSvr->arg(1).charAt(1));
+		int g = chiffres.indexOf(svrs.httpSvr->arg(2).charAt(0)) * 16
+				+ chiffres.indexOf(svrs.httpSvr->arg(2).charAt(1));
+		int b = chiffres.indexOf(svrs.httpSvr->arg(3).charAt(0)) * 16
+				+ chiffres.indexOf(svrs.httpSvr->arg(3).charAt(1));
+		if (ledNb == 156) {
+			strip.setColor(r, g, b);
+		} else {
+			strip.setMatrixPixelColor(ledNb, r, g, b);
+			strip.show();
+		}
+		String response = "";
+		response.concat(svrs.httpSvr->arg(0));
+		response.concat('#');
+		response.concat(svrs.httpSvr->arg(1));
+		response.concat(svrs.httpSvr->arg(2));
+		response.concat(svrs.httpSvr->arg(3));
 
-	 serverManager.printDebug("Show color: ");
-	 serverManager.printDebug((String) r);
-	 serverManager.printDebug(" ");
-	 serverManager.printDebug((String) g);
-	 serverManager.printDebug(" ");
-	 serverManager.printDebug((String) b);
-	 serverManager.printDebug(" Response:");
-	 serverManager.printlnDebug(response);
-	 serverManager.httpServer.send(200, "text/plain", response);
-	 svrs_printDebug("Show color: ");
-	 svrs_printDebug((String) r);
-	 svrs_printDebug(" ");
-	 svrs_printDebug((String) g);
-	 svrs_printDebug(" ");
-	 svrs_printDebug((String) b);
-	 svrs_printDebug(" Response:");
-	 svrs_printlnDebug(response);
-	 svrs.httpServer->send(200, "text/plain", response);
-	 } else {
-	 svrs_handleRequestFile();
-	 }*/
+//		svrs.printDebug("Show color: ");
+//		svrs.printDebug((String) r);
+//		svrs.printDebug(" ");
+//		svrs.printDebug((String) g);
+//		svrs.printDebug(" ");
+//		svrs.printDebug((String) b);
+//		svrs.printDebug(" Response:");
+		//svrs.printDebug(response);
+		svrs.httpSvr->send(200, "text/plain", response);
+	} else {
+		svrs.handleRequestFile();
+	}
 }
