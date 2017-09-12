@@ -1,0 +1,30 @@
+LABCENTER PROTEUS TOOL INFORMATION FILE
+=======================================
+
+In case of difficulty, please e-mail support@labcenter.co.uk
+
+Tool set up for Proteus layout 'Interface.pdsprj'.
+CADCAM generated at 17:50:18 on mercredi 30 août 2017.
+
+File List
+---------
+Top Copper              : Interface - CADCAM Top Copper.TXT
+
+Photoplotter Setup
+------------------
+Format: RS274X, ASCII, 2.4, imperial, absolute, eob=*, LZO
+Notes:  D=Diameter, S=Side, W=Width, H=Height, C=Chamfer
+
+D10	CIRCLE  D=70th                                                            FLASH
+D11	SQUARE  S=70th                                                            FLASH
+D12	CIRCLE  D=80th                                                            FLASH
+D13	CIRCLE  D=8th                                                             DRAW
+
+NC Drill Setup
+--------------
+Format: ASCII, 2.4, imperial, absolute, eob=<CR><LF>, no zero suppression.
+Notes:  Tool sizes are diameters. Layer sets are in brackets - 0=TOP, 15=BOTTOM, 1-14=INNER.
+
+
+
+[END OF FILE]
