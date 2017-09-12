@@ -11,6 +11,9 @@ void pixelRequest(); // To assign one color on one LED and show animation
 void handleRequestOnFile() {
 	svrs.handleRequestFile();
 }
+void parseTelnet(String text) {
+	svrs.printDebug(text);
+}
 unsigned long startTime = millis();
 
 void setup(void) {
@@ -50,6 +53,7 @@ void setup(void) {
 #endif
 	svrs.httpSvr->onNotFound(handleRequestOnFile);
 	svrs.httpSvr->on("/pixel", HTTP_GET, pixelRequest);
+	svrs.setReadCallback(parseTelnet);
 
 	if (WiFi.getMode() != WIFI_STA) {
 		showIP(WiFi.softAPIP());
@@ -62,8 +66,8 @@ void setup(void) {
 
 void loop() {
 	svrs.update();
-	artnet.read();
-	startShow(anim);
+	//artnet.read();
+	//startShow(anim);
 
 }
 
