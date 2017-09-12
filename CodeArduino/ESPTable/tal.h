@@ -11,7 +11,7 @@
 /* Lib used under some other  */
 //#include <FS.h>
 //#include <ESP8266FtpServer.h>
-//#include <Libs/ESP8266TelnetServer.h>
+//#include <ESP8266TelnetServer.h>
 //#include <ArduinoOTA.h>
 //#include <DNSServer.h>
 //#include <memory>
@@ -20,8 +20,8 @@ extern "C" {
 }
 #include <ESP8266WebServer.h>
 #include <MatrixStrip.h>
-#include <Libs/ServerManager.h>
-#include <Libs/WifiManager.h>
+#include <ServerManager.h>
+#include <WifiManager.h>
 #include <ArtnetWifi.h>
 
 #include "GlobalVars.h"

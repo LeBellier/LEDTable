@@ -42,7 +42,7 @@ void setup(void) {
 #endif
 	svrs.httpSvr->onNotFound(handleRequestOnFile);
 	svrs.httpSvr->on("/pixel", HTTP_GET, pixelRequest);
-	svrs.setReadCallback(parseTelnet);
+	svrs.setReadTelnetCallback(parseTelnet);
 
 	if (WiFi.getMode() != WIFI_STA) {
 		showIP(WiFi.softAPIP());
