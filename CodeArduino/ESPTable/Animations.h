@@ -1,15 +1,14 @@
 #ifndef ANIMATIONS_H
 #define ANIMATIONS_H
 
-
 #include "tal.h"
 // Prototypage
-
 
 struct Animation {
 	bool animate;
 	int showType, light, cycle;
 };
+Animation anim;
 
 // Show the selected animation
 void startShow(Animation);

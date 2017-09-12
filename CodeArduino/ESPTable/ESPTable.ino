@@ -5,17 +5,6 @@
 
 #include "tal.h"
 
-ServerManager svrs;
-
-void pixelRequest(); // To assign one color on one LED and show animation
-void handleRequestOnFile() {
-	svrs.handleRequestFile();
-}
-void parseTelnet(String text) {
-	svrs.printDebug(text);
-}
-unsigned long startTime = millis();
-
 void setup(void) {
 	Serial.begin(BAUDRATE);
 
@@ -69,49 +58,4 @@ void loop() {
 	//artnet.read();
 	//startShow(anim);
 
-}
-
-void pixelRequest() {
-	svrs.printDebug(svrs.printRequest());
-	if (svrs.httpSvr->hasArg("animation")) {
-		anim.showType = svrs.httpSvr->arg("animation").toInt();
-		anim.light = svrs.httpSvr->arg("light").toInt();
-		anim.cycle = svrs.httpSvr->arg("cycle").toInt();
-		anim.animate = true;
-		svrs.httpSvr->send(200);
-	} else if (svrs.httpSvr->hasArg("LEDnb")) {
-		String chiffres = "0123456789ABCDEF";
-		int ledNb = chiffres.indexOf(svrs.httpSvr->arg(0).charAt(0)) * 16
-				+ chiffres.indexOf(svrs.httpSvr->arg(0).charAt(1));
-		int r = chiffres.indexOf(svrs.httpSvr->arg(1).charAt(0)) * 16
-				+ chiffres.indexOf(svrs.httpSvr->arg(1).charAt(1));
-		int g = chiffres.indexOf(svrs.httpSvr->arg(2).charAt(0)) * 16
-				+ chiffres.indexOf(svrs.httpSvr->arg(2).charAt(1));
-		int b = chiffres.indexOf(svrs.httpSvr->arg(3).charAt(0)) * 16
-				+ chiffres.indexOf(svrs.httpSvr->arg(3).charAt(1));
-		if (ledNb == 156) {
-			strip.setColor(r, g, b);
-		} else {
-			strip.setMatrixPixelColor(ledNb, r, g, b);
-			strip.show();
-		}
-		String response = "";
-		response.concat(svrs.httpSvr->arg(0));
-		response.concat('#');
-		response.concat(svrs.httpSvr->arg(1));
-		response.concat(svrs.httpSvr->arg(2));
-		response.concat(svrs.httpSvr->arg(3));
-
-//		svrs.printDebug("Show color: ");
-//		svrs.printDebug((String) r);
-//		svrs.printDebug(" ");
-//		svrs.printDebug((String) g);
-//		svrs.printDebug(" ");
-//		svrs.printDebug((String) b);
-//		svrs.printDebug(" Response:");
-		//svrs.printDebug(response);
-		svrs.httpSvr->send(200, "text/plain", response);
-	} else {
-		svrs.handleRequestFile();
-	}
 }

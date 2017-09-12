@@ -3,9 +3,6 @@
 /Jinx/options.dat
 /Jinx/Perso/
 
-# Arduino Personnal File #
-/CodeArduino/ESPTable/PersonnalData.h
-
 # Java app et Eclipse files #
 /JAVAapp/build/
 /JAVAapp/dist/
