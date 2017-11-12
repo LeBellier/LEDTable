@@ -20,3 +20,6 @@ Photos/chart.png
 CodeArduino/ESPTable/data/formulaire.html
 *.bat
 *.workspace
+/CodeArduino/ESPTable/.vs/ESPTable/v15
+/CodeArduino/ESPTable/Debug
+/CodeArduino/ESPTable/__vm

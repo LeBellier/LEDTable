@@ -1,11 +1,11 @@
-#ifndef CALLBACKS_H
+﻿#ifndef CALLBACKS_H
 #define CALLBACKS_H
 
 #include "tal.h"
 
 // parse cmd from DMX port
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence,
-		uint8_t* data) {
+	uint8_t* data) {
 
 #ifdef DEBUG_ESP
 	DEBUG_PRINT("DMX: Univ: ");
@@ -29,7 +29,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence,
 		int led = i;
 		if (led < strip.numPixels()) {
 			strip.setMatrixPixelColor(led, data[i * 3], data[i * 3 + 1],
-					data[i * 3 + 2]);
+				data[i * 3 + 2]);
 		}
 	}
 	strip.show();
@@ -44,19 +44,21 @@ void pixelRequest() {
 		anim.cycle = svrs.httpSvr->arg("cycle").toInt();
 		anim.animate = true;
 		svrs.httpSvr->send(200);
-	} else if (svrs.httpSvr->hasArg("LEDnb")) {
+	}
+	else if (svrs.httpSvr->hasArg("LEDnb")) {
 		String chiffres = "0123456789ABCDEF";
 		int ledNb = chiffres.indexOf(svrs.httpSvr->arg(0).charAt(0)) * 16
-				+ chiffres.indexOf(svrs.httpSvr->arg(0).charAt(1));
+			+ chiffres.indexOf(svrs.httpSvr->arg(0).charAt(1));
 		int r = chiffres.indexOf(svrs.httpSvr->arg(1).charAt(0)) * 16
-				+ chiffres.indexOf(svrs.httpSvr->arg(1).charAt(1));
+			+ chiffres.indexOf(svrs.httpSvr->arg(1).charAt(1));
 		int g = chiffres.indexOf(svrs.httpSvr->arg(2).charAt(0)) * 16
-				+ chiffres.indexOf(svrs.httpSvr->arg(2).charAt(1));
+			+ chiffres.indexOf(svrs.httpSvr->arg(2).charAt(1));
 		int b = chiffres.indexOf(svrs.httpSvr->arg(3).charAt(0)) * 16
-				+ chiffres.indexOf(svrs.httpSvr->arg(3).charAt(1));
+			+ chiffres.indexOf(svrs.httpSvr->arg(3).charAt(1));
 		if (ledNb == 156) {
 			strip.setColor(r, g, b);
-		} else {
+		}
+		else {
 			strip.setMatrixPixelColor(ledNb, r, g, b);
 			strip.show();
 		}
@@ -67,16 +69,17 @@ void pixelRequest() {
 		response.concat(svrs.httpSvr->arg(2));
 		response.concat(svrs.httpSvr->arg(3));
 
-//		svrs.printDebug("Show color: ");
-//		svrs.printDebug((String) r);
-//		svrs.printDebug(" ");
-//		svrs.printDebug((String) g);
-//		svrs.printDebug(" ");
-//		svrs.printDebug((String) b);
-//		svrs.printDebug(" Response:");
-		//svrs.printDebug(response);
+		//		svrs.printDebug("Show color: ");
+		//		svrs.printDebug((String) r);
+		//		svrs.printDebug(" ");
+		//		svrs.printDebug((String) g);
+		//		svrs.printDebug(" ");
+		//		svrs.printDebug((String) b);
+		//		svrs.printDebug(" Response:");
+				//svrs.printDebug(response);
 		svrs.httpSvr->send(200, "text/plain", response);
-	} else {
+	}
+	else {
 		svrs.handleRequestFile();
 	}
 }

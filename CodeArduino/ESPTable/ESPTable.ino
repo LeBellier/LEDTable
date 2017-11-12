@@ -7,9 +7,10 @@
 
 void setup(void) {
 	Serial.begin(BAUDRATE);
-
-	pinMode( led, OUTPUT);
-	digitalWrite( led, 0);
+	Serial.println("");
+	Serial.println("Nouvelle version 2");
+	pinMode(led, OUTPUT);
+	digitalWrite(led, 0);
 	strip.rgbBlink();
 
 	WiFiManager wifiManager;
@@ -40,22 +41,23 @@ void setup(void) {
 #ifdef DEBUG_INIT
 	delay(20);
 #endif
-	svrs.httpSvr->onNotFound(handleRequestOnFile);
+	//svrs.httpSvr->onNotFound(handleRequestOnFile);
 	svrs.httpSvr->on("/pixel", HTTP_GET, pixelRequest);
 	svrs.setReadTelnetCallback(parseTelnet);
 
 	if (WiFi.getMode() != WIFI_STA) {
 		showIP(WiFi.softAPIP());
-	} else {
+	}
+	else {
 		showIP(WiFi.localIP());
 	}
 
-	digitalWrite( led, 1);
+	digitalWrite(led, 1);
 }
 
 void loop() {
 	svrs.update();
-	//artnet.read();
-	//startShow(anim);
+	artnet.read();
+	startShow(anim);
 
 }
