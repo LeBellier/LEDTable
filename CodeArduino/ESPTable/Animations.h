@@ -64,8 +64,8 @@ void startShow(Animation anim) {
 			break;
 		case 4:
 			theaterChase(
-					strip.Color(255 * anim.light / 100, 255 * anim.light / 100,
-							255 * anim.light / 100), 50); // White
+				strip.Color(255 * anim.light / 100, 255 * anim.light / 100,
+					255 * anim.light / 100), 50); // White
 			break;
 		case 5:
 			theaterChase(strip.Color(255 * anim.light / 100, 0, 0), 50); // Red
@@ -115,7 +115,7 @@ void rainbowCycle(uint8_t wait, uint8_t cycle, uint8_t light) {
 	for (j = 0; j < 256 * cycle; j++) { // 5 cycles of all colors on wheel
 		for (i = 0; i < strip.numPixels(); i++) {
 			strip.setPixelColor(spirale2[i],
-					Wheel(((i * 256 / strip.numPixels()) + j) & 255, light));
+				Wheel(((i * 256 / strip.numPixels()) + j) & 255, light));
 		}
 		strip.show();
 		delay(wait);
@@ -170,24 +170,24 @@ uint32_t Wheel(uint8_t wheelPos, uint8_t light) {
 	wheelPos = 255 - wheelPos;
 	if (wheelPos < 85) {
 		return strip.Color(calc255Wheel(wheelPos, light), 0,
-				calcWheel(wheelPos, light));
+			calcWheel(wheelPos, light));
 	}
 	if (wheelPos < 170) {
 		wheelPos -= 85;
 		return strip.Color(0, calcWheel(wheelPos, light),
-				calc255Wheel(wheelPos, light));
+			calc255Wheel(wheelPos, light));
 	}
 	wheelPos -= 170;
 	return strip.Color(calcWheel(wheelPos, light), calc255Wheel(wheelPos, light),
-			0);
+		0);
 }
 
 void showIP(IPAddress ip) {
 	for (int i = 0; i < 3; i++) {
-		String number = (String) (ip[i]);
+		String number = (String)(ip[i]);
 		strip.printNumber(i, number);
 	}
-	String number = (String) (ip[3]);
+	String number = (String)(ip[3]);
 	strip.printNumber(3, number);
 }
 #endif

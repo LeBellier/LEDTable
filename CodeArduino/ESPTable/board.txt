@@ -1,0 +1,4 @@
+ # local project board.txt overrides
+  #network.password=123
+  #network.auth_upload=no
+  network.port=8266

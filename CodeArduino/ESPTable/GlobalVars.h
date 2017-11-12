@@ -1,4 +1,4 @@
-#ifndef GLOBALVARS_H
+﻿#ifndef GLOBALVARS_H
 #define GLOBALVARS_H
 
 // Debug Speed
