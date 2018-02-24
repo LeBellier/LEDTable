@@ -1,7 +1,7 @@
 ﻿#ifndef CALLBACKS_H
 #define CALLBACKS_H
 
-#include "tal.h"
+#include "TAL.h"
 
 // parse cmd from DMX port
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence,
@@ -27,12 +27,12 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence,
 	// read universe and put into the right part of the display buffer
 	for (int i = 0; i < length / 3; i++) {
 		int led = i;
-		if (led < strip.numPixels()) {
-			strip.setMatrixPixelColor(led, data[i * 3], data[i * 3 + 1],
+		if (led < MatrixStrip.numPixels()) {
+			MatrixStrip.setMatrixPixelColor(led, data[i * 3], data[i * 3 + 1],
 				data[i * 3 + 2]);
 		}
 	}
-	strip.show();
+	MatrixStrip.show();
 }
 
 // To assign one color on one LED and show animation
@@ -56,11 +56,11 @@ void pixelRequest() {
 		int b = chiffres.indexOf(svrs.httpSvr->arg(3).charAt(0)) * 16
 			+ chiffres.indexOf(svrs.httpSvr->arg(3).charAt(1));
 		if (ledNb == 156) {
-			strip.setColor(r, g, b);
+			MatrixStrip.setColor(r, g, b);
 		}
 		else {
-			strip.setMatrixPixelColor(ledNb, r, g, b);
-			strip.show();
+			MatrixStrip.setMatrixPixelColor(ledNb, r, g, b);
+			MatrixStrip.show();
 		}
 		String response = "";
 		response.concat(svrs.httpSvr->arg(0));
@@ -76,7 +76,7 @@ void pixelRequest() {
 		//		svrs.printDebug(" ");
 		//		svrs.printDebug((String) b);
 		//		svrs.printDebug(" Response:");
-				//svrs.printDebug(response);
+		//svrs.printDebug(response);
 		svrs.httpSvr->send(200, "text/plain", response);
 	}
 	else {
