@@ -7,12 +7,13 @@
 /JAVAapp/build/
 /JAVAapp/dist/
 /JAVAapp/nbproject/private/
-/CodeArduino/TableaLED/.vs/ESPTable/v15
-/CodeArduino/TableaLED/Debug
-/CodeArduino/TableaLED/__vm
+/CodeArduino/Table a LED/.vs
+/CodeArduino/Table a LED/Debug
+/CodeArduino/Table a LED/__vm
 
 # Others #
 winscp556/WinSCP.ini
 *.bin
 Photos/chart.png
 *.bat
+
