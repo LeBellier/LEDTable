@@ -36,9 +36,9 @@ extern "C" {
 #define SERVER_FTP   	   bit(2)
 #define SERVER_OTA         bit(3)
 #define SERVER_TELNET      bit(4)
-#define BITFLAG_SOFT_LIMIT_ENABLE  bit(5)
-#define BITFLAG_INVERT_LIMIT_PINS  bit(6)
-#define BITFLAG_INVERT_PROBE_PIN   bit(7)
+#define RESERVE1           bit(5)
+#define RESERVE2           bit(6)
+#define RESERVE3           bit(7)
 
 class ServerManagerClass
 {
