@@ -3,23 +3,17 @@
 /Jinx/options.dat
 /Jinx/Perso/
 
-# Java app et Eclipse files #
+# Java app et VisualStudio files #
 /JAVAapp/build/
 /JAVAapp/dist/
 /JAVAapp/nbproject/private/
-/CodeArduino/ESPTable/Release/
-/CodeArduino/ESPTable/.ino.cpp
-*.project
-.settings
-*.cproject
+/CodeArduino/Table a LED/.vs
+/CodeArduino/Table a LED/Debug
+/CodeArduino/Table a LED/__vm
 
 # Others #
 winscp556/WinSCP.ini
 *.bin
 Photos/chart.png
-CodeArduino/ESPTable/data/formulaire.html
 *.bat
-*.workspace
-/CodeArduino/ESPTable/.vs/ESPTable/v15
-/CodeArduino/ESPTable/Debug
-/CodeArduino/ESPTable/__vm
+

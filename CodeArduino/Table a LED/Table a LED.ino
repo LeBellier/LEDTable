@@ -1,17 +1,13 @@
-/*
- Programme pour table à led
- Bruno Bellier
- */
-
-#include "tal.h"
+﻿#include "TAL.h"
 
 void setup(void) {
 	Serial.begin(BAUDRATE);
 	Serial.println("");
-	Serial.println("Nouvelle version 2");
+	Serial.println("Nouvelle version 3");
 	pinMode(led, OUTPUT);
 	digitalWrite(led, 0);
-	strip.rgbBlink();
+	MatrixStrip.init(pixelPin, nbRows, nbColumns);
+	MatrixStrip.rgbBlink();
 
 	WiFiManager wifiManager;
 	//reset settings - for testing
@@ -41,7 +37,7 @@ void setup(void) {
 #ifdef DEBUG_INIT
 	delay(20);
 #endif
-	//svrs.httpSvr->onNotFound(handleRequestOnFile);
+	svrs.httpSvr->onNotFound(handleRequestOnFile);
 	svrs.httpSvr->on("/pixel", HTTP_GET, pixelRequest);
 	svrs.setReadTelnetCallback(parseTelnet);
 
@@ -51,7 +47,6 @@ void setup(void) {
 	else {
 		showIP(WiFi.localIP());
 	}
-
 	digitalWrite(led, 1);
 }
 
@@ -59,5 +54,4 @@ void loop() {
 	svrs.update();
 	artnet.read();
 	startShow(anim);
-
 }

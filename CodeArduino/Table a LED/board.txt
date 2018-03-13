@@ -1,4 +1,4 @@
  # local project board.txt overrides
-  #network.password=123
-  #network.auth_upload=no
+  network.password=ESP8266
+  network.auth_upload=yes
   network.port=8266
